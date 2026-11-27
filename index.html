@@ -1,0 +1,2451 @@
+<!DOCTYPE html>
+<html lang="uz" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>46-MAKTAB — Bilim — kelajak poydevori! | Andijon shahri</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    /* ==========================================================================
+       1. DESIGN TOKENS & THEME SYSTEM (LIGHT & DARK MODE)
+       ========================================================================== */
+    :root {
+      --bg-body: #f4f8ff;
+      --bg-surface: #ffffff;
+      --bg-subtle: #eaf2ff;
+      --bg-glass: rgba(255, 255, 255, 0.9);
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border-color: rgba(15, 23, 42, 0.09);
+      --blue-royal: #1d4ed8;
+      --blue-sky: #0284c7;
+      --blue-cyan: #0ea5e9;
+      --accent-gold: #f59e0b;
+      --accent-green: #10b981;
+      --accent-red: #ef4444;
+      --gradient-brand: linear-gradient(135deg, #1e3a8a 0%, #2563eb 52%, #0ea5e9 100%);
+      --gradient-hero: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #0284c7 100%);
+      --shadow-sm: 0 4px 12px rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 12px 28px -6px rgba(29, 78, 216, 0.12);
+      --shadow-lg: 0 22px 42px -10px rgba(29, 78, 216, 0.22);
+      --radius-sm: 10px;
+      --radius-md: 16px;
+      --radius-lg: 22px;
+      --radius-xl: 28px;
+      --nav-h: 72px;
+      --transition: all 0.26s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    [data-theme="dark"] {
+      --bg-body: #070d1a;
+      --bg-surface: #0f172a;
+      --bg-subtle: #16213a;
+      --bg-glass: rgba(15, 23, 42, 0.88);
+      --text-primary: #f8fafc;
+      --text-secondary: #cbd5e1;
+      --text-muted: #94a3b8;
+      --border-color: rgba(148, 163, 184, 0.14);
+      --blue-royal: #38bdf8;
+      --blue-sky: #60a5fa;
+      --shadow-sm: 0 4px 14px rgba(0, 0, 0, 0.35);
+      --shadow-md: 0 14px 30px -6px rgba(0, 0, 0, 0.5);
+      --shadow-lg: 0 24px 44px -10px rgba(2, 132, 199, 0.25);
+    }
+
+    /* ==========================================================================
+       2. RESET & BASE TYPOGRAPHY
+       ========================================================================== */
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: var(--bg-body);
+      color: var(--text-primary);
+      line-height: 1.55;
+      overflow-x: hidden;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    button, input, select, textarea { font-family: inherit; color: inherit; }
+    button { cursor: pointer; border: none; background: none; }
+    a { text-decoration: none; color: inherit; }
+    img { max-width: 100%; display: block; }
+
+    .container {
+      width: 100%;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ==========================================================================
+       3. STICKY NAVBAR
+       ========================================================================== */
+    .navbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      height: var(--nav-h);
+      background: var(--bg-glass);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border-color);
+      box-shadow: var(--shadow-sm);
+    }
+    .navbar-inner {
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+      flex-shrink: 0;
+    }
+    .brand-badge {
+      width: 44px; height: 44px;
+      border-radius: 13px;
+      background: var(--gradient-brand);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 6px 16px rgba(37, 99, 235, 0.35);
+    }
+    .brand-text-wrap { display: flex; flex-direction: column; }
+    .brand-title {
+      font-size: 1.18rem; font-weight: 900; letter-spacing: 0.3px;
+      color: var(--blue-royal); line-height: 1.1;
+    }
+    .brand-sub {
+      font-size: 0.7rem; font-weight: 600; color: var(--text-muted);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+    .nav-item {
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      white-space: nowrap;
+      transition: var(--transition);
+    }
+    .nav-item:hover {
+      background: var(--bg-subtle);
+      color: var(--blue-royal);
+    }
+    .nav-item.active {
+      background: var(--gradient-brand);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.3);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-shrink: 0;
+    }
+    .lang-group {
+      display: flex;
+      background: var(--bg-subtle);
+      padding: 3px;
+      border-radius: 999px;
+      border: 1px solid var(--border-color);
+    }
+    .lang-btn {
+      padding: 4px 9px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .lang-btn.active {
+      background: var(--gradient-brand);
+      color: #fff;
+    }
+    .icon-circle {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      transition: var(--transition);
+    }
+    .icon-circle:hover {
+      border-color: var(--blue-royal);
+      transform: translateY(-2px);
+    }
+    .auth-pill {
+      padding: 8px 15px;
+      border-radius: 999px;
+      background: var(--gradient-brand);
+      color: #fff;
+      font-size: 0.82rem;
+      font-weight: 700;
+      box-shadow: 0 4px 12px rgba(37, 99, 235, 0.28);
+      transition: var(--transition);
+      white-space: nowrap;
+    }
+    .auth-pill:hover { transform: translateY(-1px); filter: brightness(1.06); }
+    .hamburger {
+      display: none;
+      width: 40px; height: 40px;
+      border-radius: 10px;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      align-items: center; justify-content: center;
+      font-size: 1.25rem;
+    }
+
+    /* Mobile Drawer */
+    .mobile-drawer {
+      position: fixed;
+      top: var(--nav-h);
+      left: 0; right: 0;
+      background: var(--bg-surface);
+      border-bottom: 1px solid var(--border-color);
+      padding: 16px 20px 24px;
+      display: none;
+      flex-direction: column;
+      gap: 8px;
+      z-index: 990;
+      box-shadow: var(--shadow-lg);
+    }
+    .mobile-drawer.open { display: flex; }
+    .mobile-drawer .nav-item { text-align: left; padding: 11px 14px; border-radius: 12px; }
+
+    /* ==========================================================================
+       4. HERO SECTION & CAROUSEL
+       ========================================================================== */
+    .hero-section {
+      padding: 26px 0 36px;
+    }
+    .hero-card {
+      position: relative;
+      border-radius: var(--radius-xl);
+      background: var(--gradient-hero);
+      color: #fff;
+      overflow: hidden;
+      padding: 40px;
+      box-shadow: var(--shadow-lg);
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      align-items: center;
+      gap: 32px;
+      min-height: 430px;
+    }
+    .hero-pattern {
+      position: absolute; inset: 0;
+      background-image: radial-gradient(rgba(255,255,255,0.12) 1px, transparent 1px);
+      background-size: 24px 24px;
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 2; }
+    .hero-motto-pill {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 7px 16px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      backdrop-filter: blur(8px);
+      font-size: 0.82rem; font-weight: 700;
+      margin-bottom: 16px;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .hero-title {
+      font-size: clamp(1.75rem, 3.4vw, 2.75rem);
+      font-weight: 900;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: rgba(255, 255, 255, 0.88);
+      margin-bottom: 24px;
+      max-width: 560px;
+    }
+    .hero-btns {
+      display: flex; flex-wrap: wrap; gap: 12px;
+    }
+    .btn-white {
+      padding: 12px 24px; border-radius: 999px;
+      background: #ffffff; color: #1e3a8a;
+      font-weight: 800; font-size: 0.9rem;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      transition: var(--transition);
+    }
+    .btn-white:hover { transform: translateY(-2px); background: #f0f9ff; }
+    .btn-glass {
+      padding: 12px 22px; border-radius: 999px;
+      background: rgba(255, 255, 255, 0.14);
+      color: #fff; font-weight: 700; font-size: 0.9rem;
+      border: 1px solid rgba(255, 255, 255, 0.28);
+      transition: var(--transition);
+    }
+    .btn-glass:hover { background: rgba(255, 255, 255, 0.25); transform: translateY(-2px); }
+
+    .hero-visual {
+      position: relative; z-index: 2;
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      border: 2px solid rgba(255, 255, 255, 0.22);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.35);
+      background: #0f172a;
+    }
+    .carousel-controls {
+      position: absolute;
+      bottom: 14px; left: 14px; right: 14px;
+      display: flex; align-items: center; justify-content: space-between;
+      z-index: 4;
+    }
+    .carousel-dots { display: flex; gap: 7px; }
+    .c-dot {
+      width: 10px; height: 10px; border-radius: 999px;
+      background: rgba(255,255,255,0.4);
+      transition: var(--transition);
+    }
+    .c-dot.active { width: 26px; background: #fff; }
+    .carousel-arrows { display: flex; gap: 8px; }
+    .c-arrow {
+      width: 34px; height: 34px; border-radius: 50%;
+      background: rgba(15, 23, 42, 0.65);
+      color: #fff; font-weight: 800;
+      display: flex; align-items: center; justify-content: center;
+      border: 1px solid rgba(255,255,255,0.2);
+    }
+    .c-arrow:hover { background: var(--blue-cyan); }
+
+    /* ==========================================================================
+       5. SECTIONS, STATS, CARDS & FILTER PILLS
+       ========================================================================== */
+    .page-section {
+      padding: 36px 0;
+    }
+    .section-head {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+    .section-kicker {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--blue-sky);
+      margin-bottom: 4px;
+    }
+    .section-title {
+      font-size: clamp(1.45rem, 2.5vw, 2rem);
+      font-weight: 900;
+      line-height: 1.2;
+    }
+    .sample-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(245, 158, 11, 0.14);
+      color: #d97706;
+      font-size: 0.76rem;
+      font-weight: 700;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+    }
+    [data-theme="dark"] .sample-badge { color: #fbbf24; }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      transition: var(--transition);
+    }
+    .stat-card:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--blue-cyan);
+    }
+    .stat-icon {
+      width: 52px; height: 52px;
+      border-radius: 16px;
+      background: var(--bg-subtle);
+      color: var(--blue-royal);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .stat-num {
+      font-size: 1.65rem;
+      font-weight: 900;
+      color: var(--blue-royal);
+      line-height: 1.1;
+    }
+    .stat-label {
+      font-size: 0.84rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+    }
+
+    .filter-bar {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 22px;
+    }
+    .filter-pill {
+      padding: 8px 16px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-secondary);
+      transition: var(--transition);
+    }
+    .filter-pill:hover { border-color: var(--blue-royal); color: var(--blue-royal); }
+    .filter-pill.active {
+      background: var(--gradient-brand);
+      color: #fff;
+      border-color: transparent;
+    }
+
+    .search-field {
+      padding: 9px 16px;
+      border-radius: 999px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-size: 0.86rem;
+      min-width: 240px;
+      outline: none;
+    }
+    .search-field:focus { border-color: var(--blue-royal); }
+
+    /* Grids */
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 18px; }
+    .grid-classes { display: grid; grid-template-columns: repeat(auto-fill, minmax(195px, 1fr)); gap: 16px; }
+
+    /* Generic Premium Card */
+    .card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+      display: flex;
+      flex-direction: column;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(37, 99, 235, 0.35);
+    }
+    .card-body {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      gap: 10px;
+    }
+    .card-tag {
+      display: inline-block;
+      align-self: flex-start;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--bg-subtle);
+      color: var(--blue-royal);
+      font-size: 0.74rem;
+      font-weight: 700;
+    }
+    .card-title {
+      font-size: 1.06rem;
+      font-weight: 800;
+      line-height: 1.3;
+    }
+    .card-text {
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+    .card-btn {
+      margin-top: auto;
+      padding: 9px 14px;
+      border-radius: 12px;
+      background: var(--bg-subtle);
+      color: var(--blue-royal);
+      font-size: 0.84rem;
+      font-weight: 700;
+      text-align: center;
+      transition: var(--transition);
+    }
+    .card-btn:hover {
+      background: var(--gradient-brand);
+      color: #fff;
+    }
+
+    /* Class Card Specific */
+    .class-card {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 18px;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .class-card:hover {
+      transform: translateY(-4px);
+      border-color: var(--blue-royal);
+      box-shadow: var(--shadow-md);
+    }
+    .class-badge {
+      font-size: 1.35rem;
+      font-weight: 900;
+      color: var(--blue-royal);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    /* ==========================================================================
+       6. LANGUAGE HUB (ENGLISH & RUSSIAN) & SPORTS TABLES
+       ========================================================================== */
+    .lang-hub-box {
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 26px;
+      box-shadow: var(--shadow-md);
+    }
+    .flashcard-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(175px, 1fr));
+      gap: 14px;
+      margin-top: 14px;
+    }
+    .flashcard {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    .flashcard:hover {
+      transform: scale(1.03);
+      background: var(--gradient-brand);
+      color: #fff;
+    }
+    .quiz-box {
+      background: var(--bg-subtle);
+      border-radius: var(--radius-md);
+      padding: 20px;
+      margin-top: 16px;
+    }
+    .quiz-opt {
+      display: block;
+      width: 100%;
+      text-align: left;
+      padding: 11px 16px;
+      margin-top: 8px;
+      border-radius: 12px;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      font-weight: 600;
+      transition: var(--transition);
+    }
+    .quiz-opt:hover { border-color: var(--blue-royal); }
+    .quiz-opt.correct { background: #10b981; color: #fff; border-color: #10b981; }
+    .quiz-opt.wrong { background: #ef4444; color: #fff; border-color: #ef4444; }
+
+    /* Tables (Timetable & Football Standings) */
+    .table-wrap {
+      width: 100%;
+      overflow-x: auto;
+      border-radius: var(--radius-md);
+      border: 1px solid var(--border-color);
+      background: var(--bg-surface);
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.88rem;
+    }
+    th, td {
+      padding: 12px 14px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    th {
+      background: var(--bg-subtle);
+      font-weight: 800;
+      color: var(--blue-royal);
+    }
+    tr:hover td { background: rgba(37, 99, 235, 0.04); }
+
+    /* ==========================================================================
+       7. CONTACT & MAP SECTION
+       ========================================================================== */
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.15fr;
+      gap: 24px;
+    }
+    .form-group { margin-bottom: 14px; }
+    .form-label {
+      display: block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      color: var(--text-secondary);
+    }
+    .form-control {
+      width: 100%;
+      padding: 11px 14px;
+      border-radius: 12px;
+      background: var(--bg-body);
+      border: 1px solid var(--border-color);
+      font-size: 0.9rem;
+      outline: none;
+      transition: var(--transition);
+    }
+    .form-control:focus {
+      border-color: var(--blue-royal);
+      box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+    }
+    .btn-primary {
+      padding: 12px 24px;
+      border-radius: 12px;
+      background: var(--gradient-brand);
+      color: #fff;
+      font-weight: 800;
+      font-size: 0.92rem;
+      box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
+      transition: var(--transition);
+    }
+    .btn-primary:hover { transform: translateY(-2px); filter: brightness(1.06); }
+
+    /* ==========================================================================
+       8. MODALS (CLASS DETAIL, SUBJECT, AUTH, PROFILE, LIGHTBOX) & TOAST
+       ========================================================================== */
+    .modal-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 2000;
+      background: rgba(7, 13, 26, 0.78);
+      backdrop-filter: blur(8px);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+    }
+    .modal-backdrop.open { display: flex; animation: fadeIn 0.22s ease; }
+    @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+    .modal-box {
+      width: 100%;
+      max-width: 780px;
+      max-height: 90vh;
+      overflow-y: auto;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-xl);
+      padding: 28px;
+      position: relative;
+      box-shadow: var(--shadow-lg);
+    }
+    .modal-box.narrow { max-width: 470px; }
+    .modal-close {
+      position: absolute;
+      top: 16px; right: 16px;
+      width: 36px; height: 36px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      font-size: 1.1rem;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .modal-close:hover { background: #ef4444; color: #fff; }
+
+    .toast-wrap {
+      position: fixed;
+      bottom: 22px; right: 22px;
+      z-index: 3000;
+      display: flex; flex-direction: column; gap: 8px;
+    }
+    .toast {
+      background: var(--bg-surface);
+      border-left: 4px solid var(--blue-royal);
+      color: var(--text-primary);
+      padding: 13px 18px;
+      border-radius: 12px;
+      box-shadow: var(--shadow-lg);
+      font-size: 0.88rem;
+      font-weight: 700;
+      animation: fadeIn 0.2s ease;
+    }
+
+    /* ==========================================================================
+       9. FOOTER
+       ========================================================================== */
+    .footer {
+      background: var(--bg-surface);
+      border-top: 1px solid var(--border-color);
+      padding: 48px 0 26px;
+      margin-top: 40px;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1.2fr;
+      gap: 28px;
+      margin-bottom: 30px;
+    }
+    .footer-title {
+      font-size: 0.96rem;
+      font-weight: 800;
+      margin-bottom: 14px;
+      color: var(--blue-royal);
+    }
+    .footer-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      font-size: 0.86rem;
+      color: var(--text-secondary);
+    }
+    .footer-list a:hover { color: var(--blue-royal); }
+    .social-links {
+      display: flex;
+      gap: 10px;
+      margin-top: 14px;
+    }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: 50%;
+      background: var(--bg-subtle);
+      border: 1px solid var(--border-color);
+      display: flex; align-items: center; justify-content: center;
+      transition: var(--transition);
+    }
+    .social-btn:hover { background: var(--gradient-brand); color: #fff; transform: translateY(-2px); }
+    .footer-bottom {
+      border-top: 1px solid var(--border-color);
+      padding-top: 20px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 12px;
+      font-size: 0.84rem;
+      color: var(--text-muted);
+    }
+
+    /* ==========================================================================
+       10. RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+    @media (max-width: 1120px) {
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      .hero-card { grid-template-columns: 1fr; padding: 28px; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .grid-4 { grid-template-columns: repeat(2, 1fr); }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 768px) {
+      .grid-3, .contact-grid { grid-template-columns: 1fr; }
+      .stats-grid { grid-template-columns: 1fr 1fr; gap: 12px; }
+      .grid-4 { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .brand-sub { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ========================================================================
+       STICKY NAVBAR
+       ======================================================================== -->
+  <header class="navbar">
+    <div class="container navbar-inner">
+      <a href="#home" class="brand">
+        <div class="brand-badge" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M22 10v6M2 10l10-5 10 5-10 5z"/>
+            <path d="M6 12v5c3 3 9 3 12 0v-5"/>
+          </svg>
+        </div>
+        <div class="brand-text-wrap">
+          <span class="brand-title">46-MAKTAB</span>
+          <span class="brand-sub" data-i18n="nav_location_short">Andijon sh., 80-metr</span>
+        </div>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary Navigation">
+        <a href="#home" class="nav-item active" data-i18n="nav_home">Bosh sahifa</a>
+        <a href="#about" class="nav-item" data-i18n="nav_about">Maktab haqida</a>
+        <a href="#classes" class="nav-item" data-i18n="nav_classes">Sinflar</a>
+        <a href="#teachers" class="nav-item" data-i18n="nav_teachers">O‘qituvchilar</a>
+        <a href="#subjects" class="nav-item" data-i18n="nav_subjects">Fanlar</a>
+        <a href="#events" class="nav-item" data-i18n="nav_events">Tadbirlar</a>
+        <a href="#news" class="nav-item" data-i18n="nav_news">Yangiliklar</a>
+        <a href="#contact" class="nav-item" data-i18n="nav_contact">Aloqa</a>
+      </nav>
+
+      <div class="nav-actions">
+        <div class="lang-group" role="group" aria-label="Language Switcher">
+          <button class="lang-btn active" data-lang="uz">UZ</button>
+          <button class="lang-btn" data-lang="ru">RU</button>
+          <button class="lang-btn" data-lang="en">EN</button>
+        </div>
+
+        <button class="icon-circle" id="themeToggleBtn" title="Dark / Light Mode">🌙</button>
+
+        <button class="auth-pill" id="authNavBtn" data-i18n="btn_register">Ro‘yxatdan o‘tish</button>
+
+        <button class="hamburger" id="hamburgerBtn" aria-label="Menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Mobile Navigation Drawer -->
+  <div class="mobile-drawer" id="mobileDrawer">
+    <a href="#home" class="nav-item" data-i18n="nav_home">Bosh sahifa</a>
+    <a href="#about" class="nav-item" data-i18n="nav_about">Maktab haqida</a>
+    <a href="#classes" class="nav-item" data-i18n="nav_classes">Sinflar</a>
+    <a href="#teachers" class="nav-item" data-i18n="nav_teachers">O‘qituvchilar</a>
+    <a href="#subjects" class="nav-item" data-i18n="nav_subjects">Fanlar</a>
+    <a href="#events" class="nav-item" data-i18n="nav_events">Tadbirlar</a>
+    <a href="#news" class="nav-item" data-i18n="nav_news">Yangiliklar</a>
+    <a href="#contact" class="nav-item" data-i18n="nav_contact">Aloqa</a>
+  </div>
+
+  <!-- ========================================================================
+       1. HOME / HERO CAROUSEL SECTION
+       ======================================================================== -->
+  <section id="home" class="hero-section">
+    <div class="container">
+      <div class="hero-card">
+        <div class="hero-pattern"></div>
+        <div class="hero-content">
+          <div class="hero-motto-pill">🎓 <span data-i18n="school_motto">Bilim — kelajak poydevori!</span></div>
+          <h1 class="hero-title" data-i18n="hero_welcome">46-MAKTABGA XUSH KELIBSIZ!</h1>
+          <p class="hero-subtitle" data-i18n="hero_sub">Bizning maktabimizda bilim, tarbiya va kelajak birlashadi! Andijon viloyati, Andijon shahri, 80-metr tumani.</p>
+          <div class="hero-btns">
+            <a href="#about" class="btn-white" data-i18n="nav_about">Maktab haqida</a>
+            <a href="#classes" class="btn-glass" data-i18n="btn_view_classes">Sinflarni ko‘rish</a>
+            <a href="#events" class="btn-glass" data-i18n="btn_view_events">Tadbirlarni ko‘rish</a>
+          </div>
+        </div>
+
+        <div class="hero-visual">
+          <div id="heroSlideContainer"></div>
+          <div class="carousel-controls">
+            <div class="carousel-dots" id="carouselDots">
+              <button class="c-dot active" data-slide="0" aria-label="Slide 1"></button>
+              <button class="c-dot" data-slide="1" aria-label="Slide 2"></button>
+              <button class="c-dot" data-slide="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-arrows">
+              <button class="c-arrow" id="prevSlideBtn" aria-label="Previous">‹</button>
+              <button class="c-arrow" id="nextSlideBtn" aria-label="Next">›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       2. ABOUT SCHOOL & SAMPLE STATISTICS
+       ======================================================================== -->
+  <section id="about" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="about_kicker">Ta'lim muassasasi haqida</span>
+          <h2 class="section-title" data-i18n="about_title">46-sonli umumiy o‘rta ta’lim maktabi</h2>
+        </div>
+        <span class="sample-badge">ℹ️ <span data-i18n="sample_notice">Namunaviy ko‘rsatkichlar (Demo ma'lumotlar)</span></span>
+      </div>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-icon">👨‍🎓</div>
+          <div>
+            <div class="stat-num">1,240+</div>
+            <div class="stat-label" data-i18n="stat_students">O‘quvchilar (namunaviy)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">👩‍🏫</div>
+          <div>
+            <div class="stat-num">54</div>
+            <div class="stat-label" data-i18n="stat_teachers">Tajribali ustozlar</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏫</div>
+          <div>
+            <div class="stat-num">33</div>
+            <div class="stat-label" data-i18n="stat_classes">Sinflar (1–11 A, B, V)</div>
+          </div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-icon">🏆</div>
+          <div>
+            <div class="stat-num">48+</div>
+            <div class="stat-label" data-i18n="stat_awards">Olimpiada yutuqlari</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <div class="card-body">
+            <span class="card-tag">📍 Andijon shahri</span>
+            <h3 class="card-title" data-i18n="about_card1_t">Zamonaviy ta'lim muhiti</h3>
+            <p class="card-text" data-i18n="about_card1_d">Andijon viloyati, Andijon shahri, 80-metr tumanida joylashgan 46-maktabda zamonaviy sinfxonalar, kompyuter laboratoriyalari va boy kutubxona faoliyat yuritadi.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <span class="card-tag">🌐 Tillar va IT</span>
+            <h3 class="card-title" data-i18n="about_card2_t">Chuqurlashtirilgan fanlar</h3>
+            <p class="card-text" data-i18n="about_card2_d">Aniq fanlar, informatika, ingliz va rus tillari bo‘yicha qo‘shimcha to‘garaklar va interaktiv mashg‘ulotlar tashkil etilgan.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <span class="card-tag">⚽ Sport va Madaniyat</span>
+            <h3 class="card-title" data-i18n="about_card3_t">Ma'naviy va jismoniy barkamollik</h3>
+            <p class="card-text" data-i18n="about_card3_d">O‘quvchilarimiz shahar va viloyat fan olimpiadalari, futbol, shaxmat va san'at tanlovlarida muntazam faol ishtirok etadilar.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       3. CLASSES SECTION (1–11 GRADES × A, B, V = 33 CLASSES + TIMETABLES)
+       ======================================================================== -->
+  <section id="classes" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="classes_kicker">1-sinfdan 11-sinfgacha</span>
+          <h2 class="section-title" data-i18n="classes_title">Maktab sinflari (33 ta sinf)</h2>
+        </div>
+        <span class="sample-badge">📅 <span data-i18n="click_class_hint">Dars jadvali va ro‘yxat uchun sinfni bosing</span></span>
+      </div>
+
+      <div class="filter-bar" id="classFilterBar">
+        <button class="filter-pill active" data-grade-filter="all" data-i18n="filter_all_classes">Barcha sinflar (33)</button>
+        <button class="filter-pill" data-grade-filter="primary" data-i18n="filter_primary">1–4 sinflar (Boshlang‘ich)</button>
+        <button class="filter-pill" data-grade-filter="middle" data-i18n="filter_middle">5–9 sinflar (O‘rta)</button>
+        <button class="filter-pill" data-grade-filter="high" data-i18n="filter_high">10–11 sinflar (Yuqori)</button>
+      </div>
+
+      <div class="grid-classes" id="classesGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       4. SUBJECTS SECTION (18 SUBJECTS)
+       ======================================================================== -->
+  <section id="subjects" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="subjects_kicker">O‘quv dasturi</span>
+          <h2 class="section-title" data-i18n="subjects_title">Maktab fanlari (18 ta fan)</h2>
+        </div>
+      </div>
+
+      <div class="grid-3" id="subjectsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       5. EXPERIENCED TEACHERS SECTION (54 UNIQUE SAMPLE PROFILES)
+       ======================================================================== -->
+  <section id="teachers" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="teachers_kicker">Pedagogik jamoa</span>
+          <h2 class="section-title" data-i18n="teachers_title">Tajribali ustozlar (54 ta profil)</h2>
+        </div>
+        <span class="sample-badge">ℹ️ <span data-i18n="sample_teachers_notice">Namunaviy ustozlar profillari</span></span>
+      </div>
+
+      <div class="filter-bar">
+        <input type="text" id="teacherSearchInput" class="search-field" data-i18n-placeholder="search_teacher_ph" placeholder="O‘qituvchi ismi yoki fan..." />
+        <select id="teacherSubjectFilter" class="search-field" style="min-width:200px;"></select>
+      </div>
+
+      <div class="grid-4" id="teachersGrid"></div>
+      <div style="text-align:center;margin-top:22px;">
+        <button class="btn-primary" id="toggleAllTeachersBtn" data-i18n="show_all_54">Barcha 54 ustozni ko‘rsatish</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       6. FOREIGN LANGUAGES HUB (ENGLISH & RUSSIAN INTERACTIVE)
+       ======================================================================== -->
+  <section id="languages" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="lang_hub_kicker">Chet tillari markazi</span>
+          <h2 class="section-title" data-i18n="lang_hub_title">Ingliz tili va Rus tili bo‘limi</h2>
+        </div>
+      </div>
+
+      <div class="filter-bar">
+        <button class="filter-pill active" data-lang-hub="en">🇬🇧 <span data-i18n="sub_english">Ingliz tili (English)</span></button>
+        <button class="filter-pill" data-lang-hub="ru">🇷🇺 <span data-i18n="sub_russian">Rus tili (Русский язык)</span></button>
+      </div>
+
+      <div class="lang-hub-box" id="langHubContainer"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       7. SCHOOL HOLIDAYS & EVENTS (10 EVENTS)
+       ======================================================================== -->
+  <section id="events" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="events_kicker">Ma'naviy-ma'rifiy hayot</span>
+          <h2 class="section-title" data-i18n="events_title">Maktab bayramlari va tadbirlari (10 ta)</h2>
+        </div>
+      </div>
+
+      <div class="grid-3" id="holidaysGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       8. SPORTS & INTER-CLASS FOOTBALL TOURNAMENT
+       ======================================================================== -->
+  <section id="sports" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="sports_kicker">Sog‘lom avlod</span>
+          <h2 class="section-title" data-i18n="sports_title">Sport va Futbol musobaqalari</h2>
+        </div>
+        <span class="sample-badge">⚽ <span data-i18n="sample_sports_notice">Namunaviy turnir natijalari</span></span>
+      </div>
+
+      <div class="filter-bar" id="sportTabs">
+        <button class="filter-pill active" data-sport="football">⚽ Futbol turniri</button>
+        <button class="filter-pill" data-sport="volleyball">🏐 Voleybol</button>
+        <button class="filter-pill" data-sport="basketball">🏀 Basketbol</button>
+        <button class="filter-pill" data-sport="tennis">🏓 Stol tennisi</button>
+        <button class="filter-pill" data-sport="chess">♟️ Shaxmat</button>
+        <button class="filter-pill" data-sport="running">🏃 Yugurish</button>
+      </div>
+
+      <div id="sportsContent"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       9. SCHOOL NEWS SECTION
+       ======================================================================== -->
+  <section id="news" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="news_kicker">Axborot xizmati</span>
+          <h2 class="section-title" data-i18n="news_title">Maktab yangiliklari</h2>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="newsCatBar">
+        <button class="filter-pill active" data-news-cat="all" data-i18n="filter_all">Barchasi</button>
+        <button class="filter-pill" data-news-cat="life" data-i18n="news_cat_life">Maktab hayoti</button>
+        <button class="filter-pill" data-news-cat="comp" data-i18n="news_cat_comp">Musobaqalar</button>
+        <button class="filter-pill" data-news-cat="holiday" data-i18n="news_cat_holiday">Bayramlar</button>
+        <button class="filter-pill" data-news-cat="awards" data-i18n="news_cat_awards">O‘quvchilar yutuqlari</button>
+        <button class="filter-pill" data-news-cat="edu" data-i18n="news_cat_edu">Ta'lim yangiliklari</button>
+      </div>
+
+      <div class="grid-3" id="newsGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       10. PHOTO GALLERY SECTION
+       ======================================================================== -->
+  <section id="gallery" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="gallery_kicker">Fotolavhalar</span>
+          <h2 class="section-title" data-i18n="gallery_title">Maktab galereyasi</h2>
+        </div>
+      </div>
+
+      <div class="filter-bar" id="galleryFilterBar">
+        <button class="filter-pill active" data-gal-cat="all" data-i18n="filter_all">Barchasi</button>
+        <button class="filter-pill" data-gal-cat="building" data-i18n="gal_building">Maktab binosi</button>
+        <button class="filter-pill" data-gal-cat="classrooms" data-i18n="gal_classrooms">Sinfxonalar</button>
+        <button class="filter-pill" data-gal-cat="students" data-i18n="gal_students">O‘quvchilar</button>
+        <button class="filter-pill" data-gal-cat="teachers" data-i18n="gal_teachers">Ustozlar</button>
+        <button class="filter-pill" data-gal-cat="sports" data-i18n="gal_sports">Sport musobaqalari</button>
+        <button class="filter-pill" data-gal-cat="holidays" data-i18n="gal_holidays">Bayramlar</button>
+      </div>
+
+      <div class="grid-3" id="galleryGrid"></div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       11. CONTACT SECTION (ANDIJON SHAHAR, 80-METR TUMANI)
+       ======================================================================== -->
+  <section id="contact" class="page-section">
+    <div class="container">
+      <div class="section-head">
+        <div>
+          <span class="section-kicker" data-i18n="contact_kicker">Biz bilan bog‘laning</span>
+          <h2 class="section-title" data-i18n="nav_contact">Aloqa</h2>
+        </div>
+      </div>
+
+      <div class="contact-grid">
+        <div class="card">
+          <div class="card-body" style="gap:14px;">
+            <h3 class="card-title">46-MAKTAB — Andijon</h3>
+            <p class="card-text">📍 <strong data-i18n="addr_lbl">Manzil:</strong> Andijon viloyati, Andijon shahri, 80-metr tumani, 46-sonli umumiy o‘rta ta’lim maktabi.</p>
+            <p class="card-text">📞 <strong data-i18n="phone_lbl">Telefon:</strong> +998 (74) 223-46-46 (namunaviy)</p>
+            <p class="card-text">✉️ <strong data-i18n="email_lbl">Email:</strong> info@46maktab-andijon.uz</p>
+            <p class="card-text">🕒 <strong data-i18n="hours_lbl">Ish vaqti:</strong> Dushanba – Shanba, 08:00 – 17:30</p>
+
+            <!-- Interactive Stylized Map Card of Andijon shahar, 80-metr tumani -->
+            <div style="border-radius:16px;overflow:hidden;border:1px solid var(--border-color);margin-top:6px;">
+              <svg viewBox="0 0 500 230" width="100%" height="210" xmlns="http://www.w3.org/2000/svg">
+                <rect width="500" height="230" fill="#e0f2fe"/>
+                <path d="M0 115 H500 M250 0 V230" stroke="#ffffff" stroke-width="18"/>
+                <path d="M0 115 H500 M250 0 V230" stroke="#93c5fd" stroke-width="2" stroke-dasharray="8 6"/>
+                <rect x="40" y="25" width="170" height="65" rx="12" fill="#bae6fd"/>
+                <rect x="290" y="138" width="175" height="68" rx="12" fill="#bbf7d0"/>
+                <circle cx="250" cy="115" r="26" fill="#2563eb" fill-opacity="0.22"/>
+                <circle cx="250" cy="115" r="11" fill="#1d4ed8" stroke="#fff" stroke-width="3"/>
+                <rect x="135" y="64" width="230" height="32" rx="16" fill="#0f172a"/>
+                <text x="250" y="84" fill="#ffffff" font-family="Inter,sans-serif" font-size="11.5" font-weight="800" text-anchor="middle">📍 46-MAKTAB (Andijon, 80-metr)</text>
+              </svg>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="card-body">
+            <h3 class="card-title" data-i18n="contact_form_title">Murojaat yuborish</h3>
+            <form id="contactForm" novalidate>
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_name">Ismingiz</label>
+                <input type="text" id="cName" class="form-control" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_phone">Telefon raqamingiz</label>
+                <input type="tel" id="cPhone" class="form-control" placeholder="+998 90 123 45 67" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label">Email</label>
+                <input type="email" id="cEmail" class="form-control" placeholder="name@example.com" required />
+              </div>
+              <div class="form-group">
+                <label class="form-label" data-i18n="form_msg">Xabar matni</label>
+                <textarea id="cMsg" class="form-control" rows="4" required></textarea>
+              </div>
+              <button type="submit" class="btn-primary" style="width:100%;" data-i18n="btn_send">Xabarni yuborish</button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========================================================================
+       12. FOOTER
+       ======================================================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div>
+          <div class="brand" style="margin-bottom:12px;">
+            <div class="brand-badge">🎓</div>
+            <div class="brand-text-wrap">
+              <span class="brand-title">46-MAKTAB</span>
+              <span class="brand-sub" data-i18n="school_motto">Bilim — kelajak poydevori!</span>
+            </div>
+          </div>
+          <p class="card-text" data-i18n="footer_desc">
+            Andijon viloyati, Andijon shahri, 80-metr tumanida joylashgan 46-sonli umumiy o‘rta ta’lim maktabining rasmiy uslubdagi zamonaviy axborot portali.
+          </p>
+          <div class="social-links">
+            <a href="#telegram" class="social-btn" aria-label="Telegram">✈️</a>
+            <a href="#instagram" class="social-btn" aria-label="Instagram">📸</a>
+            <a href="#youtube" class="social-btn" aria-label="YouTube">▶️</a>
+            <a href="#facebook" class="social-btn" aria-label="Facebook">📘</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title" data-i18n="footer_quick">Tezkor havolalar</div>
+          <div class="footer-list">
+            <a href="#home" data-i18n="nav_home">Bosh sahifa</a>
+            <a href="#about" data-i18n="nav_about">Maktab haqida</a>
+            <a href="#classes" data-i18n="nav_classes">Sinflar (1–11)</a>
+            <a href="#teachers" data-i18n="nav_teachers">O‘qituvchilar (54)</a>
+            <a href="#subjects" data-i18n="nav_subjects">Fanlar (18)</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title" data-i18n="footer_sections">Bo‘limlar</div>
+          <div class="footer-list">
+            <a href="#languages" data-i18n="lang_hub_title">Ingliz va Rus tili</a>
+            <a href="#events" data-i18n="nav_events">Bayramlar va tadbirlar</a>
+            <a href="#sports" data-i18n="sports_title">Sport va Futbol</a>
+            <a href="#news" data-i18n="nav_news">Yangiliklar</a>
+            <a href="#gallery" data-i18n="gallery_title">Galereya</a>
+          </div>
+        </div>
+
+        <div>
+          <div class="footer-title" data-i18n="nav_contact">Aloqa</div>
+          <div class="footer-list">
+            <span>📍 Andijon viloyati, Andijon shahri, 80-metr tumani</span>
+            <span>📞 +998 (74) 223-46-46</span>
+            <span>✉️ info@46maktab-andijon.uz</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <span>© 2026 — 46-MAKTAB. <span data-i18n="rights_reserved">Barcha huquqlar himoyalangan.</span></span>
+        <span data-i18n="school_motto">Bilim — kelajak poydevori!</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================================
+       MODALS (DETAIL VIEW, AUTH REGISTRATION/LOGIN, PROFILE, LIGHTBOX)
+       ======================================================================== -->
+  <div class="modal-backdrop" id="detailModal">
+    <div class="modal-box">
+      <button class="modal-close" id="closeDetailModal">✕</button>
+      <div id="detailModalBody"></div>
+    </div>
+  </div>
+
+  <div class="modal-backdrop" id="authModal">
+    <div class="modal-box narrow">
+      <button class="modal-close" id="closeAuthModal">✕</button>
+      <div id="authModalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast-wrap" id="toastWrap"></div>
+
+  <!-- ========================================================================
+       JAVASCRIPT: TRANSLATIONS, DATA (33 CLASSES, 18 SUBJECTS, 54 TEACHERS,
+       TIMETABLES, HOLIDAYS, SPORTS, NEWS, GALLERY) & CONTROLLER
+       ======================================================================== -->
+  <script>
+  (() => {
+    'use strict';
+
+    /* ========================================================================
+       1. 3-LANGUAGE TRANSLATIONS (UZ / RU / EN)
+       ======================================================================== */
+    const I18N = {
+      uz: {
+        nav_location_short: "Andijon sh., 80-metr",
+        nav_home: "Bosh sahifa",
+        nav_about: "Maktab haqida",
+        nav_classes: "Sinflar",
+        nav_teachers: "O‘qituvchilar",
+        nav_subjects: "Fanlar",
+        nav_events: "Tadbirlar",
+        nav_news: "Yangiliklar",
+        nav_contact: "Aloqa",
+        btn_register: "Ro‘yxatdan o‘tish",
+        btn_profile: "Profil",
+        school_motto: "Bilim — kelajak poydevori!",
+        hero_welcome: "46-MAKTABGA XUSH KELIBSIZ!",
+        hero_sub: "Bizning maktabimizda bilim, tarbiya va kelajak birlashadi! Manzil: Andijon viloyati, Andijon shahri, 80-metr tumani.",
+        btn_view_classes: "Sinflarni ko‘rish",
+        btn_view_events: "Tadbirlarni ko‘rish",
+        about_kicker: "Ta'lim muassasasi haqida",
+        about_title: "46-sonli umumiy o‘rta ta’lim maktabi",
+        sample_notice: "Namunaviy ko‘rsatkichlar (Demo ma'lumotlar)",
+        stat_students: "O‘quvchilar (namunaviy)",
+        stat_teachers: "Tajribali ustozlar",
+        stat_classes: "Sinflar (1–11 A, B, V)",
+        stat_awards: "Olimpiada yutuqlari",
+        about_card1_t: "Zamonaviy ta'lim muhiti",
+        about_card1_d: "Andijon viloyati, Andijon shahri, 80-metr tumanida joylashgan 46-maktabda zamonaviy sinfxonalar, kompyuter laboratoriyalari va boy kutubxona faoliyat yuritadi.",
+        about_card2_t: "Chuqurlashtirilgan fanlar",
+        about_card2_d: "Aniq fanlar, informatika, ingliz va rus tillari bo‘yicha qo‘shimcha to‘garaklar va interaktiv mashg‘ulotlar tashkil etilgan.",
+        about_card3_t: "Ma'naviy va jismoniy barkamollik",
+        about_card3_d: "O‘quvchilarimiz shahar va viloyat fan olimpiadalari, futbol, shaxmat va san'at tanlovlarida muntazam faol ishtirok etadilar.",
+        classes_kicker: "1-sinfdan 11-sinfgacha",
+        classes_title: "Maktab sinflari (33 ta sinf)",
+        click_class_hint: "Dars jadvali va ro‘yxat uchun sinfni bosing",
+        filter_all_classes: "Barcha sinflar (33)",
+        filter_primary: "1–4 sinflar (Boshlang‘ich)",
+        filter_middle: "5–9 sinflar (O‘rta)",
+        filter_high: "10–11 sinflar (Yuqori)",
+        subjects_kicker: "O‘quv dasturi",
+        subjects_title: "Maktab fanlari (18 ta fan)",
+        teachers_kicker: "Pedagogik jamoa",
+        teachers_title: "Tajribali ustozlar (54 ta profil)",
+        sample_teachers_notice: "Namunaviy ustozlar profillari",
+        search_teacher_ph: "O‘qituvchi ismi yoki fan...",
+        show_all_54: "Barcha 54 ustozni ko‘rsatish",
+        show_less: "Qisqartirish",
+        lang_hub_kicker: "Chet tillari markazi",
+        lang_hub_title: "Ingliz tili va Rus tili bo‘limi",
+        sub_english: "Ingliz tili (English)",
+        sub_russian: "Rus tili (Русский язык)",
+        events_kicker: "Ma'naviy-ma'rifiy hayot",
+        events_title: "Maktab bayramlari va tadbirlari (10 ta)",
+        sports_kicker: "Sog‘lom avlod",
+        sports_title: "Sport va Futbol musobaqalari",
+        sample_sports_notice: "Namunaviy turnir natijalari",
+        news_kicker: "Axborot xizmati",
+        news_title: "Maktab yangiliklari",
+        filter_all: "Barchasi",
+        news_cat_life: "Maktab hayoti",
+        news_cat_comp: "Musobaqalar",
+        news_cat_holiday: "Bayramlar",
+        news_cat_awards: "O‘quvchilar yutuqlari",
+        news_cat_edu: "Ta'lim yangiliklari",
+        gallery_kicker: "Fotolavhalar",
+        gallery_title: "Maktab galereyasi",
+        gal_building: "Maktab binosi",
+        gal_classrooms: "Sinfxonalar",
+        gal_students: "O‘quvchilar",
+        gal_teachers: "Ustozlar",
+        gal_sports: "Sport musobaqalari",
+        gal_holidays: "Bayramlar",
+        contact_kicker: "Biz bilan bog‘laning",
+        addr_lbl: "Manzil:",
+        phone_lbl: "Telefon:",
+        email_lbl: "Email:",
+        hours_lbl: "Ish vaqti:",
+        contact_form_title: "Murojaat yuborish",
+        form_name: "Ismingiz",
+        form_phone: "Telefon raqamingiz",
+        form_msg: "Xabar matni",
+        btn_send: "Xabarni yuborish",
+        footer_desc: "Andijon viloyati, Andijon shahri, 80-metr tumanida joylashgan 46-sonli umumiy o‘rta ta’lim maktabining zamonaviy axborot portali.",
+        footer_quick: "Tezkor havolalar",
+        footer_sections: "Bo‘limlar",
+        rights_reserved: "Barcha huquqlar himoyalangan.",
+        read_more: "Batafsil o‘qish",
+        homeroom_teacher: "Sinf rahbari",
+        student_roster: "O‘quvchilar ro‘yxati (namunaviy)",
+        weekly_schedule: "Haftalik dars jadvali (Dushanba – Shanba)",
+        msg_sent_ok: "Xabaringiz muvaffaqiyatli yuborildi!",
+        msg_sent_err: "Iltimos, barcha maydonlarni to‘g‘ri to‘ldiring!"
+      },
+      ru: {
+        nav_location_short: "г. Андижан, 80-метр",
+        nav_home: "Главная",
+        nav_about: "О школе",
+        nav_classes: "Классы",
+        nav_teachers: "Учителя",
+        nav_subjects: "Предметы",
+        nav_events: "Мероприятия",
+        nav_news: "Новости",
+        nav_contact: "Контакты",
+        btn_register: "Регистрация",
+        btn_profile: "Профиль",
+        school_motto: "Знание — фундамент будущего!",
+        hero_welcome: "ДОБРО ПОЖАЛОВАТЬ В ШКОЛУ №46!",
+        hero_sub: "В нашей школе объединяются знания, воспитание и будущее! Адрес: Андижанская область, город Андижан, район 80-метр.",
+        btn_view_classes: "Смотреть классы",
+        btn_view_events: "Мероприятия",
+        about_kicker: "Об образовательном учреждении",
+        about_title: "Общеобразовательная школа №46",
+        sample_notice: "Демонстрационные показатели",
+        stat_students: "Учеников (пример)",
+        stat_teachers: "Опытных учителей",
+        stat_classes: "Классов (1–11 А, Б, В)",
+        stat_awards: "Побед на олимпиадах",
+        about_card1_t: "Современная учебная среда",
+        about_card1_d: "В школе №46, расположенной в районе 80-метр города Андижана, работают современные классы, компьютерные лаборатории и библиотека.",
+        about_card2_t: "Углублённые предметы",
+        about_card2_d: "Организованы интерактивные кружки по точным наукам, информатике, английскому и русскому языкам.",
+        about_card3_t: "Спорт и культура",
+        about_card3_d: "Наши ученики регулярно побеждают на городских олимпиадах, футбольных турнирах и творческих конкурсах.",
+        classes_kicker: "С 1 по 11 класс",
+        classes_title: "Классы школы (33 класса)",
+        click_class_hint: "Нажмите на класс для просмотра расписания",
+        filter_all_classes: "Все классы (33)",
+        filter_primary: "1–4 классы (Начальные)",
+        filter_middle: "5–9 классы (Средние)",
+        filter_high: "10–11 классы (Старшие)",
+        subjects_kicker: "Учебная программа",
+        subjects_title: "Школьные предметы (18 предметов)",
+        teachers_kicker: "Педагогический коллектив",
+        teachers_title: "Опытные учителя (54 профиля)",
+        sample_teachers_notice: "Демонстрационные профили учителей",
+        search_teacher_ph: "Имя учителя или предмет...",
+        show_all_54: "Показать всех 54 учителей",
+        show_less: "Свернуть",
+        lang_hub_kicker: "Центр иностранных языков",
+        lang_hub_title: "Английский и Русский языки",
+        sub_english: "Английский язык (English)",
+        sub_russian: "Русский язык",
+        events_kicker: "Духовно-просветительская жизнь",
+        events_title: "Школьные праздники и события (10)",
+        sports_kicker: "Здоровое поколение",
+        sports_title: "Спорт и футбольные турниры",
+        sample_sports_notice: "Демонстрационные результаты турнира",
+        news_kicker: "Информационная служба",
+        news_title: "Новости школы",
+        filter_all: "Все",
+        news_cat_life: "Школьная жизнь",
+        news_cat_comp: "Соревнования",
+        news_cat_holiday: "Праздники",
+        news_cat_awards: "Достижения учеников",
+        news_cat_edu: "Новости образования",
+        gallery_kicker: "Фоторепортажи",
+        gallery_title: "Школьная галерея",
+        gal_building: "Здание школы",
+        gal_classrooms: "Классы",
+        gal_students: "Ученики",
+        gal_teachers: "Учителя",
+        gal_sports: "Спорт",
+        gal_holidays: "Праздники",
+        contact_kicker: "Свяжитесь с нами",
+        addr_lbl: "Адрес:",
+        phone_lbl: "Телефон:",
+        email_lbl: "Email:",
+        hours_lbl: "Режим работы:",
+        contact_form_title: "Отправить обращение",
+        form_name: "Ваше имя",
+        form_phone: "Номер телефона",
+        form_msg: "Текст сообщения",
+        btn_send: "Отправить сообщение",
+        footer_desc: "Современный информационный портал общеобразовательной школы №46 города Андижана (район 80-метр).",
+        footer_quick: "Быстрые ссылки",
+        footer_sections: "Разделы",
+        rights_reserved: "Все права защищены.",
+        read_more: "Подробнее",
+        homeroom_teacher: "Классный руководитель",
+        student_roster: "Список учеников (демо)",
+        weekly_schedule: "Расписание уроков (Пн – Сб)",
+        msg_sent_ok: "Ваше сообщение успешно отправлено!",
+        msg_sent_err: "Пожалуйста, заполните все поля корректно!"
+      },
+      en: {
+        nav_location_short: "Andijan, 80-metr dist.",
+        nav_home: "Home",
+        nav_about: "About School",
+        nav_classes: "Classes",
+        nav_teachers: "Teachers",
+        nav_subjects: "Subjects",
+        nav_events: "Events",
+        nav_news: "News",
+        nav_contact: "Contact",
+        btn_register: "Register / Login",
+        btn_profile: "Profile",
+        school_motto: "Knowledge is the foundation of the future!",
+        hero_welcome: "WELCOME TO SCHOOL NO. 46!",
+        hero_sub: "Where knowledge, character, and the future unite! Location: Andijan Region, Andijan City, 80-metr District.",
+        btn_view_classes: "Explore Classes",
+        btn_view_events: "View Events",
+        about_kicker: "About Our Institution",
+        about_title: "General Secondary School No. 46",
+        sample_notice: "Sample Indicators (Demo Data)",
+        stat_students: "Students (sample)",
+        stat_teachers: "Experienced Teachers",
+        stat_classes: "Classes (Grades 1–11)",
+        stat_awards: "Olympiad Awards",
+        about_card1_t: "Modern Learning Environment",
+        about_card1_d: "Located in the 80-metr district of Andijan city, School No. 46 features modern classrooms, IT labs, and a rich library.",
+        about_card2_t: "Enriched Curriculum",
+        about_card2_d: "Interactive clubs and advanced classes in Mathematics, Computer Science, English, and Russian languages.",
+        about_card3_t: "Sports & Culture",
+        about_card3_d: "Our students actively participate and win in regional subject Olympiads, football tournaments, chess, and arts.",
+        classes_kicker: "Grades 1 through 11",
+        classes_title: "School Classes (33 Classes)",
+        click_class_hint: "Click any class to view timetable & roster",
+        filter_all_classes: "All Classes (33)",
+        filter_primary: "Grades 1–4 (Primary)",
+        filter_middle: "Grades 5–9 (Middle)",
+        filter_high: "Grades 10–11 (High)",
+        subjects_kicker: "Academic Curriculum",
+        subjects_title: "School Subjects (18 Subjects)",
+        teachers_kicker: "Faculty & Staff",
+        teachers_title: "Experienced Teachers (54 Profiles)",
+        sample_teachers_notice: "Sample Faculty Profiles",
+        search_teacher_ph: "Search teacher or subject...",
+        show_all_54: "Show All 54 Teachers",
+        show_less: "Show Less",
+        lang_hub_kicker: "Foreign Languages Center",
+        lang_hub_title: "English & Russian Language Hub",
+        sub_english: "English Language",
+        sub_russian: "Russian Language",
+        events_kicker: "School Spirit & Culture",
+        events_title: "School Holidays & Celebrations (10)",
+        sports_kicker: "Healthy Generation",
+        sports_title: "Sports & Football Tournaments",
+        sample_sports_notice: "Sample Tournament Results",
+        news_kicker: "Press & Updates",
+        news_title: "School News",
+        filter_all: "All",
+        news_cat_life: "School Life",
+        news_cat_comp: "Competitions",
+        news_cat_holiday: "Holidays",
+        news_cat_awards: "Student Achievements",
+        news_cat_edu: "Education News",
+        gallery_kicker: "Photo Archive",
+        gallery_title: "School Gallery",
+        gal_building: "School Building",
+        gal_classrooms: "Classrooms",
+        gal_students: "Students",
+        gal_teachers: "Teachers",
+        gal_sports: "Sports",
+        gal_holidays: "Holidays",
+        contact_kicker: "Get in Touch",
+        addr_lbl: "Address:",
+        phone_lbl: "Phone:",
+        email_lbl: "Email:",
+        hours_lbl: "Working Hours:",
+        contact_form_title: "Send a Message",
+        form_name: "Your Name",
+        form_phone: "Phone Number",
+        form_msg: "Message",
+        btn_send: "Send Message",
+        footer_desc: "Modern digital portal of General Secondary School No. 46 located in 80-metr district, Andijan City, Uzbekistan.",
+        footer_quick: "Quick Links",
+        footer_sections: "Sections",
+        rights_reserved: "All rights reserved.",
+        read_more: "Read More",
+        homeroom_teacher: "Homeroom Teacher",
+        student_roster: "Student Roster (Sample)",
+        weekly_schedule: "Weekly Timetable (Monday – Saturday)",
+        msg_sent_ok: "Your message has been sent successfully!",
+        msg_sent_err: "Please fill in all fields accurately!"
+      }
+    };
+
+    /* ========================================================================
+       2. PROCEDURAL HIGH-RES SVG ILLUSTRATION GENERATOR (UNIQUE ARTWORK)
+       ======================================================================== */
+    function makeArtSVG(title, subtitle, emoji, colors = ['#1e3a8a', '#0284c7'], seed = 1) {
+      const [c1, c2] = colors;
+      const cx = 60 + ((seed * 47) % 240);
+      const cy = 35 + ((seed * 31) % 110);
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 220" width="400" height="220">
+        <defs>
+          <linearGradient id="bg${seed}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${c1}"/>
+            <stop offset="100%" stop-color="${c2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="400" height="220" fill="url(#bg${seed})"/>
+        <circle cx="${cx}" cy="${cy}" r="65" fill="#ffffff" fill-opacity="0.12"/>
+        <circle cx="${380 - cx}" cy="${190 - cy}" r="45" fill="#ffffff" fill-opacity="0.09"/>
+        <rect x="16" y="16" width="368" height="188" rx="18" fill="none" stroke="#ffffff" stroke-opacity="0.22" stroke-width="2"/>
+        <text x="200" y="96" font-size="60" text-anchor="middle" dominant-baseline="middle">${emoji}</text>
+        <rect x="30" y="142" width="340" height="46" rx="14" fill="#0f172a" fill-opacity="0.58"/>
+        <text x="200" y="162" font-family="Inter,Arial,sans-serif" font-size="14" font-weight="800" fill="#ffffff" text-anchor="middle">${title}</text>
+        <text x="200" y="179" font-family="Inter,Arial,sans-serif" font-size="11" font-weight="600" fill="#bae6fd" text-anchor="middle">${subtitle}</text>
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    function makeTeacherAvatarSVG(index, gender = 'f') {
+      const palettes = [
+        ['#1d4ed8', '#38bdf8'], ['#0f766e', '#34d399'], ['#4338ca', '#818cf8'],
+        ['#0369a1', '#7dd3fc'], ['#1e40af', '#60a5fa'], ['#047857', '#6ee7b7']
+      ];
+      const [c1, c2] = palettes[index % palettes.length];
+      const skin = index % 2 === 0 ? '#fde68a' : '#fed7aa';
+      const hair = index % 3 === 0 ? '#1e293b' : (index % 3 === 1 ? '#451a03' : '#334155');
+      const glasses = index % 4 === 0 ? `<rect x="74" y="64" width="20" height="12" rx="4" fill="none" stroke="#0f172a" stroke-width="2.5"/><rect x="106" y="64" width="20" height="12" rx="4" fill="none" stroke="#0f172a" stroke-width="2.5"/><line x1="94" y1="70" x2="106" y2="70" stroke="#0f172a" stroke-width="2.5"/>` : '';
+      const hairBack = gender === 'f' ? `<path d="M62 72 Q62 34 100 34 Q138 34 138 72 L142 118 Q100 126 58 118 Z" fill="${hair}"/>` : '';
+
+      const svg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 160" width="200" height="160">
+        <defs>
+          <linearGradient id="av${index}" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stop-color="${c1}"/>
+            <stop offset="100%" stop-color="${c2}"/>
+          </linearGradient>
+        </defs>
+        <rect width="200" height="160" fill="url(#av${index})"/>
+        ${hairBack}
+        <path d="M46 160 C46 122 154 122 154 160 Z" fill="#ffffff" fill-opacity="0.92"/>
+        <path d="M84 122 L100 144 L116 122 Z" fill="${c1}"/>
+        <circle cx="100" cy="72" r="30" fill="${skin}"/>
+        <path d="M70 66 Q100 38 130 66 Q128 40 100 40 Q72 40 70 66 Z" fill="${hair}"/>
+        <circle cx="88" cy="70" r="3" fill="#0f172a"/>
+        <circle cx="112" cy="70" r="3" fill="#0f172a"/>
+        <path d="M91 84 Q100 92 109 84" fill="none" stroke="#b45309" stroke-width="2.5" stroke-linecap="round"/>
+        ${glasses}
+      </svg>`;
+      return 'data:image/svg+xml;utf8,' + encodeURIComponent(svg);
+    }
+
+    /* ========================================================================
+       3. DATA REPOSITORY: 18 SUBJECTS, 54 TEACHERS, 33 CLASSES, HOLIDAYS, ETC.
+       ======================================================================== */
+    const SUBJECTS = [
+      { id: 'math', icon: '📐', uz: 'Matematika', ru: 'Математика', en: 'Mathematics', grades: '1–6', desc: 'Sonlar nazariyasi, mantiqiy masalalar va amaliy hisoblash ko‘nikmalari.' },
+      { id: 'algebra', icon: '📈', uz: 'Algebra', ru: 'Алгебра', en: 'Algebra', grades: '7–11', desc: 'Funksiyalar, tenglamalar, tengsizliklar va matematik analiz asoslari.' },
+      { id: 'geometry', icon: '🔺', uz: 'Geometriya', ru: 'Геометрия', en: 'Geometry', grades: '7–11', desc: 'Planimetriya, stereometriya va fazoviy shakllar xossalari.' },
+      { id: 'physics', icon: '⚛️', uz: 'Fizika', ru: 'Физика', en: 'Physics', grades: '6–11', desc: 'Mexanika, elektr, optika va zamonaviy fizika qonunlari laboratoriyasi.' },
+      { id: 'chemistry', icon: '🧪', uz: 'Kimyo', ru: 'Химия', en: 'Chemistry', grades: '7–11', desc: 'Moddalar tuzilishi, kimyoviy reaksiyalar va tajriba mashg‘ulotlari.' },
+      { id: 'biology', icon: '🧬', uz: 'Biologiya', ru: 'Биология', en: 'Biology', grades: '5–11', desc: 'Botanika, zoologiya, odam anatomiyasi va genetika asoslari.' },
+      { id: 'history', icon: '🏛️', uz: 'Tarix', ru: 'История', en: 'History', grades: '5–11', desc: 'O‘zbekiston tarixi va jahon sivilizatsiyasi taraqqiyot bosqichlari.' },
+      { id: 'geography', icon: '🌍', uz: 'Geografiya', ru: 'География', en: 'Geography', grades: '5–10', desc: 'Materiklar, iqlim mintaqalari va O‘zbekiston tabiiy geografiyasi.' },
+      { id: 'uzbek', icon: '📖', uz: 'Ona tili', ru: 'Родной язык', en: 'Native Language', grades: '1–11', desc: 'Adabiy til me’yorlari, imlo savodxonligi va nutq madaniyati.' },
+      { id: 'literature', icon: '✒️', uz: 'Adabiyot', ru: 'Литература', en: 'Literature', grades: '5–11', desc: 'Mumtoz va zamonaviy o‘zbek hamda jahon adabiyoti durdonalari.' },
+      { id: 'english', icon: '🇬🇧', uz: 'Ingliz tili', ru: 'Английский язык', en: 'English Language', grades: '1–11', desc: 'CEFR standartlari asosida o‘qish, yozish, tinglash va so‘zlashuv.' },
+      { id: 'russian', icon: '🇷🇺', uz: 'Rus tili', ru: 'Русский язык', en: 'Russian Language', grades: '2–11', desc: 'Rus tili grammatikasi, og‘zaki muloqot va badiiy matnlar tahlili.' },
+      { id: 'it', icon: '💻', uz: 'Informatika', ru: 'Информатика', en: 'Computer Science', grades: '5–11', desc: 'Algoritmlash, dasturlash asoslari va raqamli texnologiyalar.' },
+      { id: 'pe', icon: '⚽', uz: 'Jismoniy tarbiya', ru: 'Физкультура', en: 'Physical Education', grades: '1–11', desc: 'Jismoniy chiniqish, jamoaviy sport o‘yinlari va sog‘lom turmush tarzi.' },
+      { id: 'music', icon: '🎵', uz: 'Musiqa', ru: 'Музыка', en: 'Music', grades: '1–7', desc: 'Milliy va jahon musiqa madaniyati, vokal va cholg‘u san’ati.' },
+      { id: 'art', icon: '🎨', uz: 'Tasviriy san’at', ru: 'ИЗО', en: 'Fine Arts', grades: '1–7', desc: 'Rangtasvir, grafika va ijodiy badiiy tafakkurni rivojlantirish.' },
+      { id: 'tech', icon: '🛠️', uz: 'Texnologiya', ru: 'Технология', en: 'Technology', grades: '1–9', desc: 'Amaliy mehnat ko‘nikmalari, dizayn va muhandislik asoslari.' },
+      { id: 'ethics', icon: '🌟', uz: 'Tarbiya', ru: 'Воспитание', en: 'Ethics & Values', grades: '1–11', desc: 'Milliy qadriyatlar, odob-axloq va vatanparvarlik tarbiyasi.' }
+    ];
+
+    const FIRST_NAMES_F = ['Dilnoza', 'Malika', 'Nigora', 'Shahnoza', 'Gulnora', 'Madina', 'Zulfiya', 'Feruza', 'Munira', 'Barno', 'Nargiza', 'Saida', 'Umida', 'Rayhon', 'Zilola', 'Kamola', 'Mohira', 'Dildora'];
+    const FIRST_NAMES_M = ['Akmal', 'Sardor', 'Jasur', 'Bekzod', 'Otabek', 'Rustam', 'Azizbek', 'Ulug‘bek', 'Farrux', 'Dilshod', 'Sanjar', 'Alisher', 'Bobur', 'Sherzod', 'Jamshid', 'Murod', 'Nodir', 'Temur'];
+    const LAST_NAMES = ['Karimov', 'Toshmatov', 'Raximov', 'Abdullayev', 'Xolmatov', 'Yusupov', 'Ismoilov', 'Qodirov', 'Mirzayev', 'Sultonov', 'Nazarov', 'Ergashev', 'Tursunov', 'Umarov', 'Sobirov', 'Xasanov', 'Alimov', 'Jumaniyozov'];
+    const CATEGORIES_QUAL = ['Oliy toifali ustoz', '1-toifali ustoz', '2-toifali ustoz'];
+
+    // Generate 54 unique sample teacher profiles (3 per subject)
+    const TEACHERS = [];
+    let tCounter = 1;
+    SUBJECTS.forEach((sub, sIdx) => {
+      for (let k = 0; k < 3; k++) {
+        const isFemale = (tCounter % 2 === 1);
+        const fName = isFemale ? FIRST_NAMES_F[(sIdx + k * 3) % FIRST_NAMES_F.length] : FIRST_NAMES_M[(sIdx + k * 5) % FIRST_NAMES_M.length];
+        const lBase = LAST_NAMES[(sIdx * 2 + k * 4) % LAST_NAMES.length];
+        const lName = isFemale ? lBase + 'a' : lBase;
+        const exp = 6 + ((tCounter * 3) % 21);
+        const qual = CATEGORIES_QUAL[k % 3];
+
+        TEACHERS.push({
+          id: 't_' + tCounter,
+          name: `${fName} ${lName}`,
+          subjectId: sub.id,
+          exp,
+          qual,
+          avatar: makeTeacherAvatarSVG(tCounter, isFemale ? 'f' : 'm'),
+          bio: `${sub.uz} fani bo‘yicha ${exp} yillik pedagogik tajribaga ega ustoz (namunaviy profil). Interaktiv metodlar asosida dars o‘tadi.`,
+          achievements: `Shahar fan olimpiadasi g‘oliblari ustozi • "${qual}" sohibi (namunaviy).`
+        });
+        tCounter++;
+      }
+    });
+
+    // Generate 33 Classes (1-A, 1-B, 1-V ... 11-A, 11-B, 11-V)
+    const GROUPS = ['A', 'B', 'V'];
+    const CLASSES = [];
+    let cIdx = 0;
+    for (let grade = 1; grade <= 11; grade++) {
+      for (const grp of GROUPS) {
+        const advisor = TEACHERS[cIdx % TEACHERS.length];
+        const sampleStudents = [
+          '1. Abdullayev Sardor (namunaviy)',
+          '2. Karimova Madina (namunaviy)',
+          '3. Raximov Jasurbek (namunaviy)',
+          '4. Toshmatova Nilufar (namunaviy)',
+          '5. Mirzayev Otabek (namunaviy)',
+          '6. Ismoilova Ziyoda (namunaviy)'
+        ];
+        CLASSES.push({
+          id: `${grade}-${grp}`,
+          grade,
+          group: grp,
+          name: `${grade}-${grp}`,
+          room: `${100 + grade * 10 + GROUPS.indexOf(grp) + 1}-xona`,
+          advisor,
+          studentsCount: 28 + (cIdx % 5),
+          students: sampleStudents,
+          news: `${grade}-${grp} sinfi o‘quvchilari maktab kitobxonlik haftaligida faol qatnashdilar (namunaviy).`,
+          event: `${grade}-sinflar o‘rtasida "Bilimdonlar bellashuvi" intellektual o‘yini.`
+        });
+        cIdx++;
+      }
+    }
+
+    const HOLIDAYS = [
+      { title: '1-sentabr — Mustaqillik va bilimlar bayrami', date: '1-sentabr', emoji: '🔔', colors: ['#1e3a8a','#0ea5e9'], desc: 'Yangi o‘quv yilining tantanali ochilishi, birinchi qo‘ng‘iroq va Mustaqillik darslari.' },
+      { title: '1-oktabr — Ustoz va murabbiylar kuni', date: '1-oktabr', emoji: '💐', colors: ['#0369a1','#38bdf8'], desc: 'Aziz ustozlarga bag‘ishlangan bayram konserti va minnatdorchilik tadbirlari.' },
+      { title: '8-dekabr — Konstitutsiya kuni', date: '8-dekabr', emoji: '📜', colors: ['#1d4ed8','#60a5fa'], desc: 'O‘zbekiston Respublikasi Konstitutsiyasi qabul qilingan kun munosabati bilan huquqiy viktorina.' },
+      { title: '31-dekabr — Yangi yil bayrami', date: '31-dekabr', emoji: '🎄', colors: ['#0f766e','#2dd4bf'], desc: 'Maktab archasi atrofida quvnoq sahna ko‘rinishlari va sovg‘alar ulashish.' },
+      { title: '14-yanvar — Vatan himoyachilari kuni', date: '14-yanvar', emoji: '🛡️', colors: ['#1e40af','#3b82f6'], desc: 'Harbiy-vatanparvarlik musobaqalari, saf ko‘rigi va sport estafetalari.' },
+      { title: '8-mart — Xalqaro xotin-qizlar kuni', date: '8-mart', emoji: '🌷', colors: ['#be185d','#f472b6'], desc: 'Onajonlar va qizlarimiz uchun bayram tabriklari hamda ijodiy chiqishlar.' },
+      { title: '21-mart — Navro‘z umumxalq bayrami', date: '21-mart', emoji: '🌿', colors: ['#047857','#34d399'], desc: 'Milliy taomlar ko‘rgazmasi, varrak uchirish va milliy xalq o‘yinlari sayli.' },
+      { title: '9-may — Xotira va qadrlash kuni', date: '9-may', emoji: '🕊️', colors: ['#334155','#64748b'], desc: 'Tinchlik va jasorat darslari, faxriylar bilan ma’naviy uchrashuvlar.' },
+      { title: '25-may — So‘nggi qo‘ng‘iroq', date: '25-may', emoji: '🎓', colors: ['#1e3a8a','#2563eb'], desc: 'O‘quv yili yakuni, a’lochi o‘quvchilarni taqdirlash va bitiruvchilar tadbiri.' },
+      { title: 'Bitiruv kechasi', date: 'Iyun', emoji: '✨', colors: ['#312e81','#6366f1'], desc: '11-sinf bitiruvchilariga shahodatnomalar topshirish tantanali kechasi.' }
+    ].map((h, i) => ({ ...h, img: makeArtSVG(h.title.split('—')[0].trim(), h.date, h.emoji, h.colors, 100 + i) }));
+
+    const NEWS_LIST = [
+      { id: 'n1', cat: 'awards', date: '18.11.2026', title: '46-maktab o‘quvchilari Andijon shahar fan olimpiadasida 12 ta sovrinli o‘rinni egalladi (namunaviy)', summary: 'Matematika, informatika va ingliz tili fanlaridan yuqori sinf o‘quvchilarimiz faxrli o‘rinlarni qo‘lga kiritdilar.', img: makeArtSVG('Fan Olimpiadasi', 'Andijon shahar bosqichi', '🏅', ['#1e3a8a','#0284c7'], 201) },
+      { id: 'n2', cat: 'life', date: '12.11.2026', title: '80-metr tumanidagi maktabimizda zamonaviy IT va robototexnika xonasi yangilandi (namunaviy)', summary: 'Yangi kompyuter jamlanmalari va interaktiv doskalar o‘quvchilar ixtiyoriga topshirildi.', img: makeArtSVG('Yangi IT Xonasi', 'Raqamli ta’lim', '💻', ['#0369a1','#38bdf8'], 202) },
+      { id: 'n3', cat: 'comp', date: '05.11.2026', title: 'Sinflar o‘rtasida "Maktab kubogi" futbol turniriga start berildi (namunaviy)', summary: '8–11-sinf jamoalari o‘rtasida qizg‘in va murosasiz bahslar bo‘lib o‘tmoqda.', img: makeArtSVG('Futbol Turniri', 'Maktab kubogi 2026', '⚽', ['#047857','#10b981'], 203) },
+      { id: 'n4', cat: 'edu', date: '29.10.2026', title: 'Ingliz va rus tillari oyligi doirasida ochiq darslar haftaligi o‘tkazildi (namunaviy)', summary: 'O‘quvchilar chet tillarida sahna ko‘rinishlari va debatlar namoyish etishdi.', img: makeArtSVG('Chet Tillari Oyligi', 'English & Russian', '🌐', ['#1d4ed8','#60a5fa'], 204) },
+      { id: 'n5', cat: 'holiday', date: '01.10.2026', title: 'Ustoz va murabbiylar kuni munosabati bilan bayram tadbiri bo‘lib o‘tdi (namunaviy)', summary: 'O‘quvchilar jamoasi ustozlarga atab she’r va qo‘shiqlar ijro etishdi.', img: makeArtSVG('Ustozlar Kuni', '1-oktabr bayrami', '💐', ['#4338ca','#818cf8'], 205) },
+      { id: 'n6', cat: 'life', date: '20.09.2026', title: '"Yashil makon" loyihasi doirasida maktab hovlisiga mevali va manzarali daraxtlar ekildi (namunaviy)', summary: 'Ustozlar va yuqori sinf o‘quvchilari maktab bog‘ini obodonlashtirishda faol qatnashdilar.', img: makeArtSVG('Yashil Makon', 'Ekologik aksiya', '🌳', ['#065f46','#34d399'], 206) }
+    ];
+
+    const GALLERY_ITEMS = [
+      { cat: 'building', title: '46-MAKTAB asosiy binosi (Andijon sh., 80-metr)', img: makeArtSVG('46-MAKTAB Binolari', 'Andijon shahar, 80-metr', '🏫', ['#1e3a8a','#0ea5e9'], 301) },
+      { cat: 'classrooms', title: 'Zamonaviy Informatika va STEM sinfxonasi', img: makeArtSVG('Informatika Sinfi', 'Zamonaviy jihozlar', '🖥️', ['#0369a1','#38bdf8'], 302) },
+      { cat: 'students', title: 'O‘quvchilarning laboratoriya mashg‘uloti', img: makeArtSVG('Kimyo Laboratoriyasi', 'Amaliy dars', '🔬', ['#0f766e','#2dd4bf'], 303) },
+      { cat: 'teachers', title: 'Pedagogik kengash va ustozlar jamoasi', img: makeArtSVG('Ustozlar Jamoasi', '54 nafar pedagog', '👩‍🏫', ['#1d4ed8','#60a5fa'], 304) },
+      { cat: 'sports', title: 'Maktab sport maydonidagi futbol bahsi', img: makeArtSVG('Sport Maydoni', 'Futbol musobaqasi', '🏟️', ['#047857','#10b981'], 305) },
+      { cat: 'holidays', title: 'Navro‘z va Mustaqillik bayrami sahnasi', img: makeArtSVG('Maktab Bayramlari', 'Madaniy tadbirlar', '🎉', ['#4338ca','#818cf8'], 306) }
+    ];
+
+    /* ========================================================================
+       4. APPLICATION STATE & LOCALSTORAGE
+       ======================================================================== */
+    const STORAGE_KEY = 'maktab46_portal_v1';
+    let state = {
+      lang: 'uz',
+      theme: 'light',
+      user: null // { firstName, lastName, phone, email, role, className, passHash }
+    };
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY));
+      if (saved) state = { ...state, ...saved };
+    } catch (e) {}
+
+    function saveState() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch (e) {}
+    }
+
+    function t(key) {
+      return (I18N[state.lang] && I18N[state.lang][key]) || I18N.uz[key] || key;
+    }
+
+    function showToast(msg) {
+      const wrap = document.getElementById('toastWrap');
+      const el = document.createElement('div');
+      el.className = 'toast';
+      el.textContent = msg;
+      wrap.appendChild(el);
+      setTimeout(() => el.remove(), 3000);
+    }
+
+    function simpleHash(str) {
+      let h = 2166136261;
+      for (let i = 0; i < str.length; i++) {
+        h ^= str.charCodeAt(i);
+        h = Math.imul(h, 16777619);
+      }
+      return 'sha_demo_' + (h >>> 0).toString(16);
+    }
+
+    /* ========================================================================
+       5. HERO CAROUSEL (AUTO + MANUAL)
+       ======================================================================== */
+    const HERO_SLIDES = [
+      { title: '46-MAKTAB Binolari', sub: 'Andijon shahri, 80-metr tumani', emoji: '🏫', colors: ['#1e3a8a','#0284c7'] },
+      { title: 'Bilimli O‘quvchilar', sub: 'Zamonaviy sinfxonalar va IT markaz', emoji: '👨‍🎓', colors: ['#0369a1','#0ea5e9'] },
+      { title: 'Tajribali Ustozlar', sub: '54 nafar malakali pedagoglar', emoji: '👩‍🏫', colors: ['#1d4ed8','#38bdf8'] }
+    ];
+    let currentSlide = 0;
+
+    function renderHeroSlide() {
+      const s = HERO_SLIDES[currentSlide];
+      document.getElementById('heroSlideContainer').innerHTML = `
+        <img src="${makeArtSVG(s.title, s.sub, s.emoji, s.colors, 50 + currentSlide)}" alt="${s.title}" style="width:100%;height:260px;object-fit:cover;" />
+      `;
+      document.querySelectorAll('.c-dot').forEach((d, idx) => d.classList.toggle('active', idx === currentSlide));
+    }
+
+    setInterval(() => {
+      currentSlide = (currentSlide + 1) % HERO_SLIDES.length;
+      renderHeroSlide();
+    }, 5000);
+
+    document.getElementById('prevSlideBtn').onclick = () => {
+      currentSlide = (currentSlide - 1 + HERO_SLIDES.length) % HERO_SLIDES.length;
+      renderHeroSlide();
+    };
+    document.getElementById('nextSlideBtn').onclick = () => {
+      currentSlide = (currentSlide + 1) % HERO_SLIDES.length;
+      renderHeroSlide();
+    };
+    document.querySelectorAll('.c-dot').forEach(dot => {
+      dot.onclick = () => { currentSlide = Number(dot.dataset.slide); renderHeroSlide(); };
+    });
+
+    /* ========================================================================
+       6. RENDER FUNCTIONS: CLASSES (33), SUBJECTS (18), TEACHERS (54)
+       ======================================================================== */
+    let classFilter = 'all';
+    function renderClasses() {
+      const grid = document.getElementById('classesGrid');
+      const filtered = CLASSES.filter(c => {
+        if (classFilter === 'primary') return c.grade >= 1 && c.grade <= 4;
+        if (classFilter === 'middle') return c.grade >= 5 && c.grade <= 9;
+        if (classFilter === 'high') return c.grade >= 10 && c.grade <= 11;
+        return true;
+      });
+      grid.innerHTML = filtered.map(c => `
+        <div class="class-card" data-class-id="${c.id}">
+          <div class="class-badge">
+            <span>${c.name}</span>
+            <span style="font-size:0.76rem;padding:3px 9px;border-radius:999px;background:var(--bg-subtle);">${c.room}</span>
+          </div>
+          <div class="card-text">👩‍🏫 ${c.advisor.name}</div>
+          <div style="font-size:0.78rem;color:var(--text-muted);">👥 ${c.studentsCount} (namunaviy)</div>
+        </div>
+      `).join('');
+
+      grid.querySelectorAll('.class-card').forEach(el => {
+        el.onclick = () => openClassModal(el.dataset.classId);
+      });
+    }
+
+    function openClassModal(classId) {
+      const cls = CLASSES.find(c => c.id === classId);
+      if (!cls) return;
+      const days = ['Dushanba', 'Seshanba', 'Chorshanba', 'Payshanba', 'Juma', 'Shanba'];
+      const times = ['08:30 – 09:15', '09:25 – 10:10', '10:25 – 11:10', '11:20 – 12:05', '12:15 – 13:00'];
+
+      const scheduleRows = days.map((day, dIdx) => {
+        const lessons = times.map((tm, lIdx) => {
+          const sub = SUBJECTS[(cls.grade + dIdx + lIdx) % SUBJECTS.length];
+          const teach = TEACHERS.find(x => x.subjectId === sub.id);
+          return `<tr><td><strong>${day}</strong></td><td>${tm}</td><td>${sub.icon} ${sub[state.lang]}</td><td>${teach ? teach.name : ''}</td><td>${cls.room}</td></tr>`;
+        }).join('');
+        return lessons;
+      }).join('');
+
+      document.getElementById('detailModalBody').innerHTML = `
+        <span class="card-tag">${cls.room} • ${t('sample_notice')}</span>
+        <h2 style="font-size:1.6rem;font-weight:900;margin:8px 0;">🏫 ${cls.name} sinfi</h2>
+        <p class="card-text" style="margin-bottom:14px;"><strong>${t('homeroom_teacher')}:</strong> ${cls.advisor.name} (${cls.advisor.qual})</p>
+
+        <div class="grid-3" style="margin-bottom:18px;">
+          <div class="card"><div class="card-body"><strong>📰 Sinf yangiligi</strong><p class="card-text">${cls.news}</p></div></div>
+          <div class="card"><div class="card-body"><strong>🎉 Sinf tadbiri</strong><p class="card-text">${cls.event}</p></div></div>
+          <div class="card"><div class="card-body"><strong>👥 ${t('student_roster')}</strong><div style="font-size:0.8rem;color:var(--text-secondary);">${cls.students.join('<br>')}</div></div></div>
+        </div>
+
+        <h3 style="font-size:1.1rem;font-weight:800;margin-bottom:10px;">📅 ${t('weekly_schedule')}</h3>
+        <div class="table-wrap" style="max-height:290px;">
+          <table>
+            <thead><tr><th>Kun</th><th>Vaqt</th><th>Fan</th><th>O‘qituvchi</th><th>Xona</th></tr></thead>
+            <tbody>${scheduleRows}</tbody>
+          </table>
+        </div>
+      `;
+      document.getElementById('detailModal').classList.add('open');
+    }
+
+    function renderSubjects() {
+      const grid = document.getElementById('subjectsGrid');
+      grid.innerHTML = SUBJECTS.map(sub => {
+        const subTeachers = TEACHERS.filter(x => x.subjectId === sub.id);
+        return `
+          <article class="card">
+            <div class="card-body">
+              <div style="display:flex;align-items:center;justify-content:space-between;">
+                <span style="font-size:2rem;">${sub.icon}</span>
+                <span class="card-tag">${sub.grades}-sinflar</span>
+              </div>
+              <h3 class="card-title">${sub[state.lang]}</h3>
+              <p class="card-text">${sub.desc}</p>
+              <div style="font-size:0.8rem;color:var(--text-muted);">👩‍🏫 ${subTeachers.map(x => x.name).join(', ')}</div>
+              <button class="card-btn" data-sub-id="${sub.id}">${t('read_more')} →</button>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      grid.querySelectorAll('[data-sub-id]').forEach(btn => {
+        btn.onclick = () => openSubjectModal(btn.dataset.subId);
+      });
+    }
+
+    function openSubjectModal(subId) {
+      const sub = SUBJECTS.find(s => s.id === subId);
+      if (!sub) return;
+      const subTeachers = TEACHERS.filter(x => x.subjectId === sub.id);
+      document.getElementById('detailModalBody').innerHTML = `
+        <div style="font-size:2.6rem;">${sub.icon}</div>
+        <h2 style="font-size:1.55rem;font-weight:900;margin:6px 0;">${sub[state.lang]} (${sub.grades}-sinflar)</h2>
+        <p class="card-text" style="margin-bottom:18px;">${sub.desc}</p>
+        <h3 style="font-size:1.05rem;font-weight:800;margin-bottom:12px;">👩‍🏫 Fan o‘qituvchilari (3 ta namunaviy profil)</h3>
+        <div class="grid-3">
+          ${subTeachers.map(tc => `
+            <div class="card">
+              <img src="${tc.avatar}" alt="${tc.name}" style="width:100%;height:135px;object-fit:cover;"/>
+              <div class="card-body">
+                <span class="card-tag">${tc.qual}</span>
+                <h4 class="card-title">${tc.name}</h4>
+                <p class="card-text">${tc.exp} yil tajriba. ${tc.bio}</p>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+      document.getElementById('detailModal').classList.add('open');
+    }
+
+    let showAllTeachers = false;
+    function renderTeachers() {
+      const select = document.getElementById('teacherSubjectFilter');
+      if (!select.options.length) {
+        select.innerHTML = `<option value="all">${t('filter_all')} (18 fan)</option>` +
+          SUBJECTS.map(s => `<option value="${s.id}">${s[state.lang]}</option>`).join('');
+      }
+      const q = document.getElementById('teacherSearchInput').value.trim().toLowerCase();
+      const subF = select.value || 'all';
+
+      let list = TEACHERS.filter(tc => {
+        const sub = SUBJECTS.find(s => s.id === tc.subjectId);
+        const matchesSub = subF === 'all' || tc.subjectId === subF;
+        const matchesQ = !q || tc.name.toLowerCase().includes(q) || (sub && sub[state.lang].toLowerCase().includes(q));
+        return matchesSub && matchesQ;
+      });
+
+      const visible = (showAllTeachers || q || subF !== 'all') ? list : list.slice(0, 12);
+      document.getElementById('teachersGrid').innerHTML = visible.map(tc => {
+        const sub = SUBJECTS.find(s => s.id === tc.subjectId);
+        return `
+          <article class="card">
+            <img src="${tc.avatar}" alt="${tc.name}" style="width:100%;height:150px;object-fit:cover;"/>
+            <div class="card-body">
+              <span class="card-tag">${sub ? sub[state.lang] : ''}</span>
+              <h3 class="card-title">${tc.name}</h3>
+              <p class="card-text">⭐ ${tc.qual} • ${tc.exp} yil</p>
+              <p class="card-text" style="font-size:0.8rem;">${tc.bio}</p>
+              <div style="font-size:0.76rem;color:var(--blue-sky);font-weight:600;">🏆 ${tc.achievements}</div>
+            </div>
+          </article>
+        `;
+      }).join('');
+
+      document.getElementById('toggleAllTeachersBtn').textContent = showAllTeachers ? t('show_less') : t('show_all_54');
+    }
+
+    /* ========================================================================
+       7. FOREIGN LANGUAGES HUB (ENGLISH & RUSSIAN INTERACTIVE MODULES)
+       ======================================================================== */
+    let activeLangHub = 'en';
+    function renderLanguageHub() {
+      const box = document.getElementById('langHubContainer');
+      if (activeLangHub === 'en') {
+        const vocab = [
+          { w: 'Knowledge', tr: 'Bilim / Знание' },
+          { w: 'Education', tr: 'Ta’lim / Образование' },
+          { w: 'Achievement', tr: 'Yutuq / Достижение' },
+          { w: 'Future', tr: 'Kelajak / Будущее' },
+          { w: 'Library', tr: 'Kutubxona / Библиотека' },
+          { w: 'Excellence', tr: 'Mukammallik / Совершенство' }
+        ];
+        box.innerHTML = `
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:1.3rem;font-weight:900;">🇬🇧 English Language Learning Hub</h3>
+              <p class="card-text">Levels: Beginner (A1–A2) • Intermediate (B1) • Upper-Intermediate (B2)</p>
+            </div>
+            <span class="card-tag">Speaking • Grammar • Vocabulary • Tests</span>
+          </div>
+
+          <div class="grid-3" style="margin-bottom:18px;">
+            <div class="card"><div class="card-body"><strong>📘 Grammar Focus</strong><p class="card-text">Present Simple vs. Present Continuous, Modal Verbs (can, must, should) & Conditionals.</p></div></div>
+            <div class="card"><div class="card-body"><strong>🗣️ Speaking Practice</strong><p class="card-text">Topic: "My School in Andijan and My Future Profession" — 2-minute presentation prompt.</p></div></div>
+            <div class="card"><div class="card-body"><strong>🎯 CEFR Preparation</strong><p class="card-text">Interactive listening, reading comprehension, and weekly vocabulary drills.</p></div></div>
+          </div>
+
+          <h4 style="font-weight:800;">🃏 Interactive Vocabulary Cards (Click to flip)</h4>
+          <div class="flashcard-grid">
+            ${vocab.map(v => `<div class="flashcard" data-w="${v.w}" data-tr="${v.tr}"><strong>${v.w}</strong><div style="font-size:0.78rem;margin-top:4px;opacity:0.8;">Click to translate</div></div>`).join('')}
+          </div>
+
+          <div class="quiz-box">
+            <strong>📝 Quick Grammar Test:</strong>
+            <p style="margin-top:6px;">She _____ to School No. 46 every morning.</p>
+            <button class="quiz-opt" data-correct="false">A) go</button>
+            <button class="quiz-opt" data-correct="true">B) goes</button>
+            <button class="quiz-opt" data-correct="false">C) going</button>
+          </div>
+        `;
+      } else {
+        const rusLetters = ['А а','Б б','В в','Г г','Д д','Е е','Ё ё','Ж ж','З з','И и','К к','Л л','М м','Н н','О о','П п','Р р','С с','Т т','У у','Ф ф','Х х','Ц ц','Ч ч','Ш ш','Щ щ','Э э','Ю ю','Я я'];
+        box.innerHTML = `
+          <div style="display:flex;flex-wrap:wrap;justify-content:space-between;gap:12px;margin-bottom:16px;">
+            <div>
+              <h3 style="font-size:1.3rem;font-weight:900;">🇷🇺 Центр изучения русского языка</h3>
+              <p class="card-text">Алфавит • Грамматика • Словарь • Тексты для чтения • Интерактивные тесты</p>
+            </div>
+            <span class="card-tag">Орфография и Развитие речи</span>
+          </div>
+
+          <h4 style="font-weight:800;margin-bottom:10px;">🔤 Русский алфавит</h4>
+          <div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:18px;">
+            ${rusLetters.map(l => `<span style="padding:6px 11px;border-radius:8px;background:var(--bg-subtle);font-weight:800;font-size:0.86rem;">${l}</span>`).join('')}
+          </div>
+
+          <div class="grid-3" style="margin-bottom:16px;">
+            <div class="card"><div class="card-body"><strong>📚 Грамматика</strong><p class="card-text">Род имён существительных, спряжение глаголов и правописание жи–ши, ча–ща, чу–щу.</p></div></div>
+            <div class="card"><div class="card-body"><strong>📖 Текст для чтения</strong><p class="card-text">«Наша любимая школа №46 находится в городе Андижане. Мы любим читать книги и изучать языки.»</p></div></div>
+            <div class="card"><div class="card-body"><strong>✍️ Упражнения</strong><p class="card-text">Составление диалогов на тему «В библиотеке» и «Мой любимый предмет».</p></div></div>
+          </div>
+
+          <div class="quiz-box">
+            <strong>📝 Интерактивный тест по русскому языку:</strong>
+            <p style="margin-top:6px;">Выберите правильное написание слова:</p>
+            <button class="quiz-opt" data-correct="true">А) Жизнь и школа</button>
+            <button class="quiz-opt" data-correct="false">Б) Жызнь и школа</button>
+          </div>
+        `;
+      }
+
+      box.querySelectorAll('.flashcard').forEach(fc => {
+        fc.onclick = () => {
+          const flipped = fc.dataset.flipped === '1';
+          fc.dataset.flipped = flipped ? '0' : '1';
+          fc.innerHTML = flipped
+            ? `<strong>${fc.dataset.w}</strong><div style="font-size:0.78rem;margin-top:4px;opacity:0.8;">Click to translate</div>`
+            : `<strong>${fc.dataset.tr}</strong><div style="font-size:0.78rem;margin-top:4px;">✓ Translated</div>`;
+        };
+      });
+
+      box.querySelectorAll('.quiz-opt').forEach(opt => {
+        opt.onclick = () => {
+          const ok = opt.dataset.correct === 'true';
+          opt.classList.add(ok ? 'correct' : 'wrong');
+          showToast(ok ? '✅ To‘g‘ri javob! / Правильно!' : '❌ Qayta urinib ko‘ring!');
+        };
+      });
+    }
+
+    /* ========================================================================
+       8. HOLIDAYS (10), SPORTS & FOOTBALL STANDINGS, NEWS & GALLERY
+       ======================================================================== */
+    function renderHolidays() {
+      document.getElementById('holidaysGrid').innerHTML = HOLIDAYS.map((h, i) => `
+        <article class="card">
+          <img src="${h.img}" alt="${h.title}" style="width:100%;height:175px;object-fit:cover;"/>
+          <div class="card-body">
+            <span class="card-tag">📅 ${h.date}</span>
+            <h3 class="card-title">${h.title}</h3>
+            <p class="card-text">${h.desc}</p>
+            <button class="card-btn" data-hol-idx="${i}">🖼️ ${t('gallery_title')}</button>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-hol-idx]').forEach(btn => {
+        btn.onclick = () => {
+          const h = HOLIDAYS[Number(btn.dataset.holIdx)];
+          document.getElementById('detailModalBody').innerHTML = `
+            <img src="${h.img}" alt="${h.title}" style="width:100%;border-radius:16px;margin-bottom:14px;"/>
+            <span class="card-tag">📅 ${h.date}</span>
+            <h2 style="font-size:1.45rem;font-weight:900;margin:8px 0;">${h.title}</h2>
+            <p class="card-text">${h.desc}</p>
+          `;
+          document.getElementById('detailModal').classList.add('open');
+        };
+      });
+    }
+
+    let activeSport = 'football';
+    function renderSports() {
+      const container = document.getElementById('sportsContent');
+      if (activeSport === 'football') {
+        const teams = [
+          { name: '11-A "Burgutlar" (namunaviy)', p: 4, w: 3, d: 1, l: 0, gf: 11, ga: 4, pts: 10 },
+          { name: '10-B "Andijon Yoshlari" (namunaviy)', p: 4, w: 3, d: 0, l: 1, gf: 9, ga: 5, pts: 9 },
+          { name: '11-B "Lochinlar" (namunaviy)', p: 4, w: 2, d: 1, l: 1, gf: 8, ga: 6, pts: 7 },
+          { name: '9-A "Champion" (namunaviy)', p: 4, w: 1, d: 0, l: 3, gf: 5, ga: 10, pts: 3 },
+          { name: '10-A "Start" (namunaviy)', p: 4, w: 0, d: 0, l: 4, gf: 3, ga: 11, pts: 0 }
+        ];
+        container.innerHTML = `
+          <div class="grid-3" style="margin-bottom:20px;">
+            <div class="card"><div class="card-body"><span class="card-tag">15.11.2026 • Final bosqich</span><h3 class="card-title">11-A (3 : 1) 10-B</h3><p class="card-text">🏆 G‘olib: 11-A "Burgutlar" (namunaviy natija)</p></div></div>
+            <div class="card"><div class="card-body"><span class="card-tag">12.11.2026 • Yarim final</span><h3 class="card-title">11-B (2 : 2) 11-A</h3><p class="card-text">⚽ Penaltilar bo‘yicha 11-A g‘alaba qozondi (namunaviy)</p></div></div>
+            <div class="card"><div class="card-body"><span class="card-tag">10.11.2026 • Guruh bahsi</span><h3 class="card-title">10-B (4 : 1) 9-A</h3><p class="card-text">⭐ Eng yaxshi to‘purar: Sardor A. (namunaviy)</p></div></div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>#</th><th>Jamoa (Sinf)</th><th>O‘yin</th><th>G‘alaba</th><th>Durang</th><th>Mag‘lubiyat</th><th>To‘plar</th><th>Ochko</th></tr></thead>
+              <tbody>
+                ${teams.map((tm, i) => `<tr><td><strong>${i + 1}</strong></td><td><strong>${tm.name}</strong></td><td>${tm.p}</td><td>${tm.w}</td><td>${tm.d}</td><td>${tm.l}</td><td>${tm.gf}:${tm.ga}</td><td><strong style="color:var(--blue-royal);">${tm.pts}</strong></td></tr>`).join('')}
+              </tbody>
+            </table>
+          </div>
+        `;
+      } else {
+        const sportMap = {
+          volleyball: { icon: '🏐', name: 'Voleybol musobaqasi', info: '8–11-sinf qizlar va o‘g‘il bolalar jamoalari o‘rtasidagi maktab birinchiligi (namunaviy).' },
+          basketball: { icon: '🏀', name: 'Basketbol 3x3', info: 'Yuqori sinflar o‘rtasida tezkor basketbol turniri va snayperlar tanlovi (namunaviy).' },
+          tennis: { icon: '🏓', name: 'Stol tennisi', info: '5–11-sinf o‘quvchilari o‘rtasida yakkalik va juftlik bahslari (namunaviy).' },
+          chess: { icon: '♟️', name: 'Shaxmat — "Oq fil" turniri', info: 'Barcha sinflar o‘rtasida intellektual shaxmat musobaqasi (namunaviy).' },
+          running: { icon: '🏃', name: 'Yengil atletika va yugurish', info: '100m, 400m va estafeta yugurish bahslari (namunaviy).' }
+        };
+        const sp = sportMap[activeSport];
+        container.innerHTML = `
+          <div class="card">
+            <div class="card-body">
+              <div style="font-size:2.4rem;">${sp.icon}</div>
+              <h3 class="card-title">${sp.name}</h3>
+              <p class="card-text">${sp.info}</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    let newsCat = 'all';
+    function renderNews() {
+      const list = newsCat === 'all' ? NEWS_LIST : NEWS_LIST.filter(n => n.cat === newsCat);
+      document.getElementById('newsGrid').innerHTML = list.map(n => `
+        <article class="card">
+          <img src="${n.img}" alt="${n.title}" style="width:100%;height:175px;object-fit:cover;"/>
+          <div class="card-body">
+            <span class="card-tag">🗓️ ${n.date}</span>
+            <h3 class="card-title">${n.title}</h3>
+            <p class="card-text">${n.summary}</p>
+            <button class="card-btn" data-news-id="${n.id}">${t('read_more')} →</button>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-news-id]').forEach(btn => {
+        btn.onclick = () => {
+          const item = NEWS_LIST.find(x => x.id === btn.dataset.newsId);
+          if (!item) return;
+          document.getElementById('detailModalBody').innerHTML = `
+            <img src="${item.img}" alt="${item.title}" style="width:100%;border-radius:16px;margin-bottom:14px;"/>
+            <span class="card-tag">🗓️ ${item.date}</span>
+            <h2 style="font-size:1.45rem;font-weight:900;margin:8px 0;">${item.title}</h2>
+            <p class="card-text" style="font-size:0.96rem;">${item.summary} Andijon viloyati, Andijon shahri, 80-metr tumani 46-sonli umumiy o‘rta ta’lim maktabi axborot xizmati.</p>
+          `;
+          document.getElementById('detailModal').classList.add('open');
+        };
+      });
+    }
+
+    let galCat = 'all';
+    function renderGallery() {
+      const list = galCat === 'all' ? GALLERY_ITEMS : GALLERY_ITEMS.filter(g => g.cat === galCat);
+      document.getElementById('galleryGrid').innerHTML = list.map((g, idx) => `
+        <article class="card" style="cursor:pointer;" data-gal-idx="${idx}">
+          <img src="${g.img}" alt="${g.title}" style="width:100%;height:190px;object-fit:cover;"/>
+          <div class="card-body">
+            <h3 class="card-title">${g.title}</h3>
+          </div>
+        </article>
+      `).join('');
+
+      document.querySelectorAll('[data-gal-idx]').forEach(el => {
+        el.onclick = () => {
+          const item = list[Number(el.dataset.galIdx)];
+          document.getElementById('detailModalBody').innerHTML = `
+            <img src="${item.img}" alt="${item.title}" style="width:100%;border-radius:16px;margin-bottom:12px;"/>
+            <h3 style="font-size:1.25rem;font-weight:800;">${item.title}</h3>
+          `;
+          document.getElementById('detailModal').classList.add('open');
+        };
+      });
+    }
+
+    /* ========================================================================
+       9. REGISTRATION, LOGIN & USER PROFILE (FRONTEND DEMO MODE)
+       ======================================================================== */
+    function updateAuthNavButton() {
+      const btn = document.getElementById('authNavBtn');
+      if (state.user) {
+        btn.textContent = `👤 ${state.user.firstName}`;
+      } else {
+        btn.textContent = t('btn_register');
+      }
+    }
+
+    function openAuthModal(mode = 'register') {
+      const modal = document.getElementById('authModal');
+      const body = document.getElementById('authModalBody');
+
+      if (state.user) {
+        body.innerHTML = `
+          <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:10px;">👤 ${t('btn_profile')}</h2>
+          <div class="card" style="margin-bottom:14px;">
+            <div class="card-body">
+              <p><strong>Ism / Familiya:</strong> ${state.user.firstName} ${state.user.lastName}</p>
+              <p><strong>Rol:</strong> ${state.user.role}</p>
+              ${state.user.className ? `<p><strong>Sinf:</strong> ${state.user.className}</p>` : ''}
+              <p><strong>Telefon:</strong> ${state.user.phone}</p>
+              <p><strong>Email:</strong> ${state.user.email}</p>
+            </div>
+          </div>
+          <p style="font-size:0.76rem;color:var(--text-muted);margin-bottom:14px;">ℹ️ Frontend demo rejimi: ma'lumotlar mahalliy brauzerda xavfsiz xeshlangan holda saqlanadi.</p>
+          <button class="btn-primary" id="logoutBtn" style="width:100%;background:#ef4444;">Chiqish (Logout)</button>
+        `;
+        body.querySelector('#logoutBtn').onclick = () => {
+          state.user = null;
+          saveState();
+          updateAuthNavButton();
+          modal.classList.remove('open');
+          showToast('Tizimdan chiqildi');
+        };
+        modal.classList.add('open');
+        return;
+      }
+
+      if (mode === 'login') {
+        body.innerHTML = `
+          <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:12px;">🔑 Tizimga kirish (Demo)</h2>
+          <form id="loginForm">
+            <div class="form-group"><label class="form-label">Email</label><input type="email" id="lEmail" class="form-control" required /></div>
+            <div class="form-group"><label class="form-label">Parol</label><input type="password" id="lPass" class="form-control" required /></div>
+            <button type="submit" class="btn-primary" style="width:100%;">Kirish</button>
+          </form>
+          <p style="text-align:center;margin-top:12px;font-size:0.85rem;">Akkauntingiz yo‘qmi? <button id="switchToReg" style="color:var(--blue-royal);font-weight:800;">Ro‘yxatdan o‘tish</button></p>
+        `;
+        body.querySelector('#switchToReg').onclick = () => openAuthModal('register');
+        body.querySelector('#loginForm').onsubmit = (e) => {
+          e.preventDefault();
+          const email = document.getElementById('lEmail').value.trim();
+          const pass = document.getElementById('lPass').value;
+          if (!email || pass.length < 4) { showToast('Email va parolni kiriting!'); return; }
+          state.user = { firstName: email.split('@')[0], lastName: '', phone: '+998', email, role: 'O‘quvchi', className: '9-A', passHash: simpleHash(pass) };
+          saveState();
+          updateAuthNavButton();
+          modal.classList.remove('open');
+          showToast('Xush kelibsiz!');
+        };
+        modal.classList.add('open');
+        return;
+      }
+
+      body.innerHTML = `
+        <h2 style="font-size:1.4rem;font-weight:900;margin-bottom:6px;">🎓 ${t('btn_register')}</h2>
+        <p style="font-size:0.78rem;color:var(--text-muted);margin-bottom:12px;">Frontend demo rejimi (haqiqiy autentifikatsiya uchun backend talab etiladi).</p>
+        <form id="regForm">
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group"><label class="form-label">Ism</label><input type="text" id="rFirst" class="form-control" required /></div>
+            <div class="form-group"><label class="form-label">Familiya</label><input type="text" id="rLast" class="form-control" required /></div>
+          </div>
+          <div class="form-group"><label class="form-label">Telefon raqami</label><input type="tel" id="rPhone" class="form-control" placeholder="+998 90 123 45 67" required /></div>
+          <div class="form-group"><label class="form-label">Email</label><input type="email" id="rEmail" class="form-control" required /></div>
+          <div class="form-group">
+            <label class="form-label">Foydalanuvchi turi</label>
+            <select id="rRole" class="form-control">
+              <option value="O‘quvchi">O‘quvchi</option>
+              <option value="Ota-ona">Ota-ona</option>
+              <option value="O‘qituvchi">O‘qituvchi</option>
+            </select>
+          </div>
+          <div id="studentClassFields" style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group">
+              <label class="form-label">Sinf (1–11)</label>
+              <select id="rGrade" class="form-control">${Array.from({ length: 11 }, (_, i) => `<option value="${i + 1}">${i + 1}-sinf</option>`).join('')}</select>
+            </div>
+            <div class="form-group">
+              <label class="form-label">Guruh (A, B, V)</label>
+              <select id="rGroup" class="form-control"><option value="A">A sinf</option><option value="B">B sinf</option><option value="V">V sinf</option></select>
+            </div>
+          </div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;">
+            <div class="form-group"><label class="form-label">Parol</label><input type="password" id="rPass" class="form-control" required /></div>
+            <div class="form-group"><label class="form-label">Parolni tasdiqlash</label><input type="password" id="rPass2" class="form-control" required /></div>
+          </div>
+          <button type="submit" class="btn-primary" style="width:100%;">${t('btn_register')}</button>
+        </form>
+        <p style="text-align:center;margin-top:10px;font-size:0.84rem;">Avval ro‘yxatdan o‘tganmisiz? <button id="switchToLogin" style="color:var(--blue-royal);font-weight:800;">Kirish</button></p>
+      `;
+
+      const roleSel = body.querySelector('#rRole');
+      const clsBox = body.querySelector('#studentClassFields');
+      roleSel.onchange = () => { clsBox.style.display = roleSel.value === 'O‘quvchi' ? 'grid' : 'none'; };
+      body.querySelector('#switchToLogin').onclick = () => openAuthModal('login');
+
+      body.querySelector('#regForm').onsubmit = (e) => {
+        e.preventDefault();
+        const firstName = document.getElementById('rFirst').value.trim();
+        const lastName = document.getElementById('rLast').value.trim();
+        const phone = document.getElementById('rPhone').value.trim();
+        const email = document.getElementById('rEmail').value.trim();
+        const role = roleSel.value;
+        const p1 = document.getElementById('rPass').value;
+        const p2 = document.getElementById('rPass2').value;
+
+        if (!firstName || !lastName || !email || p1.length < 4 || p1 !== p2) {
+          showToast('Ma’lumotlarni tekshiring (parollar mos kelishi kerak)!');
+          return;
+        }
+        const className = role === 'O‘quvchi' ? `${document.getElementById('rGrade').value}-${document.getElementById('rGroup').value}` : '';
+        state.user = { firstName, lastName, phone, email, role, className, passHash: simpleHash(p1) };
+        saveState();
+        updateAuthNavButton();
+        modal.classList.remove('open');
+        showToast(`Muvaffaqiyatli ro‘yxatdan o‘tdingiz, ${firstName}!`);
+      };
+
+      modal.classList.add('open');
+    }
+
+    /* ========================================================================
+       10. THEME, LANGUAGE & EVENT WIRING
+       ======================================================================== */
+    function applyTheme() {
+      document.documentElement.setAttribute('data-theme', state.theme);
+      document.getElementById('themeToggleBtn').textContent = state.theme === 'dark' ? '☀️' : '🌙';
+    }
+
+    function applyLanguage() {
+      document.documentElement.lang = state.lang;
+      document.querySelectorAll('[data-i18n]').forEach(el => { el.textContent = t(el.dataset.i18n); });
+      document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { el.placeholder = t(el.dataset.i18nPlaceholder); });
+      document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === state.lang));
+      updateAuthNavButton();
+      renderSubjects();
+      renderTeachers();
+      renderHolidays();
+      renderNews();
+    }
+
+    // Event bindings
+    document.getElementById('themeToggleBtn').onclick = () => {
+      state.theme = state.theme === 'light' ? 'dark' : 'light';
+      saveState();
+      applyTheme();
+    };
+
+    document.querySelectorAll('.lang-btn').forEach(btn => {
+      btn.onclick = () => {
+        state.lang = btn.dataset.lang;
+        saveState();
+        applyLanguage();
+      };
+    });
+
+    document.getElementById('hamburgerBtn').onclick = () => {
+      document.getElementById('mobileDrawer').classList.toggle('open');
+    };
+    document.querySelectorAll('#mobileDrawer .nav-item').forEach(a => {
+      a.onclick = () => document.getElementById('mobileDrawer').classList.remove('open');
+    });
+
+    document.querySelectorAll('#classFilterBar .filter-pill').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#classFilterBar .filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        classFilter = btn.dataset.gradeFilter;
+        renderClasses();
+      };
+    });
+
+    document.getElementById('teacherSearchInput').oninput = renderTeachers;
+    document.getElementById('teacherSubjectFilter').onchange = renderTeachers;
+    document.getElementById('toggleAllTeachersBtn').onclick = () => {
+      showAllTeachers = !showAllTeachers;
+      renderTeachers();
+    };
+
+    document.querySelectorAll('[data-lang-hub]').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('[data-lang-hub]').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeLangHub = btn.dataset.langHub;
+        renderLanguageHub();
+      };
+    });
+
+    document.querySelectorAll('#sportTabs .filter-pill').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#sportTabs .filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        activeSport = btn.dataset.sport;
+        renderSports();
+      };
+    });
+
+    document.querySelectorAll('#newsCatBar .filter-pill').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#newsCatBar .filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        newsCat = btn.dataset.newsCat;
+        renderNews();
+      };
+    });
+
+    document.querySelectorAll('#galleryFilterBar .filter-pill').forEach(btn => {
+      btn.onclick = () => {
+        document.querySelectorAll('#galleryFilterBar .filter-pill').forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        galCat = btn.dataset.galCat;
+        renderGallery();
+      };
+    });
+
+    document.getElementById('contactForm').onsubmit = (e) => {
+      e.preventDefault();
+      const name = document.getElementById('cName').value.trim();
+      const phone = document.getElementById('cPhone').value.trim();
+      const email = document.getElementById('cEmail').value.trim();
+      const msg = document.getElementById('cMsg').value.trim();
+      if (name.length < 2 || phone.length < 7 || !email.includes('@') || msg.length < 5) {
+        showToast(t('msg_sent_err'));
+        return;
+      }
+      e.target.reset();
+      showToast(t('msg_sent_ok'));
+    };
+
+    document.getElementById('authNavBtn').onclick = () => openAuthModal('register');
+    document.getElementById('closeDetailModal').onclick = () => document.getElementById('detailModal').classList.remove('open');
+    document.getElementById('closeAuthModal').onclick = () => document.getElementById('authModal').classList.remove('open');
+
+    // Boot Application
+    applyTheme();
+    renderHeroSlide();
+    renderClasses();
+    applyLanguage();
+    renderLanguageHub();
+    renderSports();
+    renderGallery();
+  })();
+  </script>
+</body>
+</html>
